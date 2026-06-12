@@ -402,7 +402,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 
 .features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 
@@ -847,6 +847,89 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   .footer-inner { flex-direction: column; align-items: center; text-align: center; }
   .footer-nav ul { align-items: center; flex-direction: row; flex-wrap: wrap; justify-content: center; }
   .footer-brand { max-width: 100%; }
+}
+
+/* =============================================
+   NAV AUTH STATES
+   ============================================= */
+#nav-auth-signed-out { display: flex; align-items: center; }
+
+/* Google's rendered button sits inside here — wrap controls sizing */
+#google-signin-container > div { border-radius: var(--radius-pill) !important; overflow: hidden; }
+
+.nav-user-link {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem 0.75rem 0.35rem 0.35rem;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--color-border);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  text-decoration: none;
+}
+.nav-user-link:hover { border-color: var(--color-primary); box-shadow: var(--shadow-glow-primary); }
+
+.nav-avatar {
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-primary);
+  flex-shrink: 0;
+}
+#nav-username {
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--color-text);
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.nav-dashboard-label {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  color: var(--color-accent);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* =============================================
+   JOIN BANNER
+   ============================================= */
+.join-banner {
+  background: linear-gradient(90deg, rgba(6,182,212,0.15), rgba(217,70,239,0.12));
+  border-bottom: 1px solid rgba(6,182,212,0.35);
+  padding-block: 0.9rem;
+}
+.join-banner[hidden] { display: none; }
+
+.join-banner-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.join-banner-icon { font-size: 1.4rem; flex-shrink: 0; }
+.join-banner-inner p { flex: 1; font-size: 0.95rem; color: var(--color-text); }
+.join-banner-inner strong { color: var(--color-secondary); }
+
+.join-banner-close {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--color-text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: color var(--transition), background var(--transition);
+}
+.join-banner-close:hover { color: var(--color-text); background: rgba(255,255,255,0.08); }
+
+/* Locked group field (pre-filled from invite link) */
+input[data-locked="true"] {
+  background: rgba(6,182,212,0.06) !important;
+  border-color: rgba(6,182,212,0.4) !important;
+  color: var(--color-secondary) !important;
+  cursor: not-allowed;
 }
 
 /* Reduced motion */

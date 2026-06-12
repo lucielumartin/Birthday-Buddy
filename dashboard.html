@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — Birthday Buddy</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="dashboard.css" />
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body class="dashboard-page">
+
+  <!-- ===== DASHBOARD HEADER ===== -->
+  <header class="site-header dash-header" role="banner">
+    <nav class="nav container" aria-label="Dashboard navigation">
+      <a href="index.html" class="logo" aria-label="Birthday Buddy home">
+        <span class="logo-icon" aria-hidden="true">🎂</span>
+        <span class="logo-text">Birthday<span class="logo-accent">Buddy</span></span>
+      </a>
+
+      <div class="dash-nav-center" aria-label="Breadcrumb">
+        <span class="breadcrumb-sep" aria-hidden="true">/</span>
+        <span class="breadcrumb-current">Dashboard</span>
+      </div>
+
+      <div class="dash-user-menu">
+        <img id="dash-avatar" src="" alt="" class="dash-avatar" width="36" height="36" />
+        <div class="dash-user-info">
+          <span id="dash-username" class="dash-username"></span>
+          <span id="dash-email" class="dash-email"></span>
+        </div>
+        <button class="btn btn-ghost btn-sm" id="signout-btn" aria-label="Sign out">Sign Out</button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="dash-main">
+    <div class="container dash-container">
+
+      <!-- Welcome -->
+      <section class="dash-welcome" aria-labelledby="welcome-heading">
+        <div class="dash-welcome-text">
+          <h1 id="welcome-heading" class="dash-title">
+            Hey, <span id="welcome-name">there</span>! <span aria-hidden="true">👋</span>
+          </h1>
+          <p class="dash-subtitle">Manage your birthday groups and invite your crew to celebrate.</p>
+        </div>
+        <button class="btn btn-primary" id="new-group-btn-hero" aria-label="Create a new group">
+          + New Group
+        </button>
+      </section>
+
+      <!-- Groups section -->
+      <section class="dash-groups" aria-labelledby="groups-heading">
+        <div class="dash-groups-header">
+          <h2 id="groups-heading" class="dash-section-title">My Groups</h2>
+          <span class="group-count-badge" id="group-count" aria-live="polite" aria-atomic="true"></span>
+        </div>
+
+        <!-- Empty state -->
+        <div class="dash-empty" id="dash-empty" hidden>
+          <div class="empty-emoji" aria-hidden="true">🎈</div>
+          <h3 class="empty-title">No groups yet</h3>
+          <p class="empty-desc">Create your first group and share the invite link with your friends, family, or team.</p>
+          <button class="btn btn-primary" id="new-group-btn-empty">Create My First Group</button>
+        </div>
+
+        <!-- Groups grid -->
+        <div class="groups-grid" id="groups-grid" aria-live="polite" aria-label="Your groups"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ===== CREATE GROUP MODAL ===== -->
+  <div class="modal-overlay" id="create-modal" role="dialog" aria-modal="true" aria-labelledby="create-modal-title" hidden>
+    <div class="modal-box">
+      <button class="modal-close" id="create-modal-close" aria-label="Close modal">✕</button>
+      <div class="modal-header">
+        <span class="modal-icon" aria-hidden="true">🎂</span>
+        <h2 class="modal-title" id="create-modal-title">Create New Group</h2>
+        <p class="modal-desc">Give your group a name. You'll get a shareable invite link right after.</p>
+      </div>
+      <form class="modal-form" id="create-group-form" novalidate>
+        <div class="form-group">
+          <label for="new-group-name">Group Name <span class="required" aria-label="required">*</span></label>
+          <input
+            type="text"
+            id="new-group-name"
+            name="groupName"
+            placeholder="e.g. The Avengers 🦸"
+            required
+            aria-required="true"
+            aria-describedby="new-group-error"
+            maxlength="60"
+          />
+          <span class="field-error" id="new-group-error" role="alert" aria-live="polite"></span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">
+          <span class="btn-text">Create Group 🎉</span>
+          <span class="btn-loading" aria-hidden="true">Creating...</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== INVITE MODAL ===== -->
+  <div class="modal-overlay" id="invite-modal" role="dialog" aria-modal="true" aria-labelledby="invite-modal-title" hidden>
+    <div class="modal-box">
+      <button class="modal-close" id="invite-modal-close" aria-label="Close modal">✕</button>
+      <div class="modal-header">
+        <span class="modal-icon" aria-hidden="true">🔗</span>
+        <h2 class="modal-title" id="invite-modal-title">Invite Members</h2>
+        <p class="modal-desc">Share this link — anyone who opens it will be taken straight to the registration form for your group.</p>
+      </div>
+      <div class="invite-url-row">
+        <input type="text" id="invite-url-input" class="invite-url-input" readonly aria-label="Invite link" />
+        <button class="btn btn-primary copy-btn" id="copy-invite-btn" aria-label="Copy invite link">
+          <span class="copy-icon" aria-hidden="true">📋</span>
+          <span class="copy-label">Copy</span>
+        </button>
+      </div>
+      <p class="invite-hint">💡 Works via WhatsApp, email, or any messaging app.</p>
+    </div>
+  </div>
+
+  <!-- ===== MEMBERS MODAL ===== -->
+  <div class="modal-overlay" id="members-modal" role="dialog" aria-modal="true" aria-labelledby="members-modal-title" hidden>
+    <div class="modal-box modal-box--wide">
+      <button class="modal-close" id="members-modal-close" aria-label="Close modal">✕</button>
+      <div class="modal-header">
+        <span class="modal-icon" aria-hidden="true">👥</span>
+        <h2 class="modal-title" id="members-modal-title">Members</h2>
+        <p class="modal-desc" id="members-modal-group-name"></p>
+      </div>
+      <div id="members-list-container">
+        <!-- Populated by JS -->
+      </div>
+      <div class="modal-footer-actions">
+        <button class="btn btn-ghost btn-sm" id="members-copy-invite-btn">
+          🔗 Copy Invite Link
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DELETE CONFIRM MODAL ===== -->
+  <div class="modal-overlay" id="delete-modal" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title" hidden>
+    <div class="modal-box modal-box--sm">
+      <div class="modal-header">
+        <span class="modal-icon" aria-hidden="true">⚠️</span>
+        <h2 class="modal-title" id="delete-modal-title">Delete Group?</h2>
+        <p class="modal-desc">This will permanently delete <strong id="delete-group-name"></strong> and all its member data. This cannot be undone.</p>
+      </div>
+      <div class="delete-actions">
+        <button class="btn btn-ghost" id="delete-cancel-btn">Cancel</button>
+        <button class="btn btn-danger" id="delete-confirm-btn">Yes, Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
