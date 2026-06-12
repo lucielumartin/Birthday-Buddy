@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birthday Buddy — Never Miss a Birthday Again</title>
+  <meta name="description" content="Birthday Buddy lets WhatsApp group members register birthdays in a shared directory and receive automatic WhatsApp notifications on the big day." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="site-header" role="banner">
+    <nav class="nav container" aria-label="Main navigation">
+      <a href="#" class="logo" aria-label="Birthday Buddy home">
+        <span class="logo-icon" aria-hidden="true">🎂</span>
+        <span class="logo-text">Birthday<span class="logo-accent">Buddy</span></span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+      <ul class="nav-links" id="nav-menu" role="list">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact" class="btn btn-sm">Get Started</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="hero-bg-shapes" aria-hidden="true">
+        <span class="shape shape-1"></span>
+        <span class="shape shape-2"></span>
+        <span class="shape shape-3"></span>
+        <span class="shape shape-4"></span>
+      </div>
+      <div class="container hero-inner">
+        <div class="hero-badge">
+          <span>🎉</span> Now available for WhatsApp groups
+        </div>
+        <h1 id="hero-heading" class="hero-title">
+          Never Miss<br />
+          <span class="highlight">A Birthday</span><br />
+          Again.
+        </h1>
+        <p class="hero-subtitle">
+          Birthday Buddy connects your WhatsApp group with a shared birthday directory.
+          Register once — get automatic reminders every time someone celebrates their big day.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Register Your Birthday</a>
+          <a href="#how-it-works" class="btn btn-ghost">See How It Works</a>
+        </div>
+        <div class="hero-stats" role="list" aria-label="Key stats">
+          <div class="stat" role="listitem">
+            <span class="stat-value">100%</span>
+            <span class="stat-label">Free</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat" role="listitem">
+            <span class="stat-value">0</span>
+            <span class="stat-label">Apps to Install</span>
+          </div>
+          <div class="stat-divider" aria-hidden="true"></div>
+          <div class="stat" role="listitem">
+            <span class="stat-value">∞</span>
+            <span class="stat-label">Celebrations</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>🎂 Happy Birthday!</span>
+          <span>🎁 Make a Wish!</span>
+          <span>🥳 Party Time!</span>
+          <span>🎈 Celebrate Today!</span>
+          <span>🍰 Birthday Cake!</span>
+          <span>🎊 Congratulations!</span>
+          <span>🎂 Happy Birthday!</span>
+          <span>🎁 Make a Wish!</span>
+          <span>🥳 Party Time!</span>
+          <span>🎈 Celebrate Today!</span>
+          <span>🍰 Birthday Cake!</span>
+          <span>🎊 Congratulations!</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FEATURES ===== -->
+    <section class="features section" id="features" aria-labelledby="features-heading">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Why Birthday Buddy</p>
+          <h2 id="features-heading" class="section-title">Built for Your Group,<br />Not Your Phone Storage</h2>
+        </div>
+        <div class="features-grid">
+
+          <article class="feature-card" tabindex="0">
+            <div class="feature-icon" aria-hidden="true">📋</div>
+            <h3 class="feature-title">Shared Directory</h3>
+            <p class="feature-desc">
+              One central birthday registry for the whole group. Everyone adds their date, everyone benefits.
+            </p>
+          </article>
+
+          <article class="feature-card feature-card--accent" tabindex="0">
+            <div class="feature-icon" aria-hidden="true">📱</div>
+            <h3 class="feature-title">WhatsApp Notifications</h3>
+            <p class="feature-desc">
+              Automated birthday alerts sent directly to the group chat — no extra apps, no fuss.
+            </p>
+          </article>
+
+          <article class="feature-card" tabindex="0">
+            <div class="feature-icon" aria-hidden="true">⚡</div>
+            <h3 class="feature-title">Instant Setup</h3>
+            <p class="feature-desc">
+              Register in under 60 seconds. Just your name, birthday, and WhatsApp number. Done.
+            </p>
+          </article>
+
+          <article class="feature-card" tabindex="0">
+            <div class="feature-icon" aria-hidden="true">🔒</div>
+            <h3 class="feature-title">Privacy First</h3>
+            <p class="feature-desc">
+              Your data stays within your group. No third-party sharing, no marketing emails — ever.
+            </p>
+          </article>
+
+          <article class="feature-card feature-card--accent" tabindex="0">
+            <div class="feature-icon" aria-hidden="true">🌍</div>
+            <h3 class="feature-title">Any Time Zone</h3>
+            <p class="feature-desc">
+              Notifications go out at the right local time, wherever your group members are in the world.
+            </p>
+          </article>
+
+          <article class="feature-card" tabindex="0">
+            <div class="feature-icon" aria-hidden="true">🎨</div>
+            <h3 class="feature-title">Custom Messages</h3>
+            <p class="feature-desc">
+              Personalize the birthday message template so every alert feels warm and on-brand for your group.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="how-it-works section" id="how-it-works" aria-labelledby="hiw-heading">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">The Process</p>
+          <h2 id="hiw-heading" class="section-title">Three Steps to<br />Birthday Bliss</h2>
+        </div>
+        <ol class="steps-list" role="list">
+
+          <li class="step">
+            <div class="step-number" aria-hidden="true">01</div>
+            <div class="step-content">
+              <h3 class="step-title">Register Your Birthday</h3>
+              <p class="step-desc">
+                Fill in the form below with your name, birthday date, and WhatsApp number.
+                Your info is added to the group's shared directory instantly.
+              </p>
+            </div>
+            <div class="step-visual" aria-hidden="true">📝</div>
+          </li>
+
+          <li class="step step--reverse">
+            <div class="step-number" aria-hidden="true">02</div>
+            <div class="step-content">
+              <h3 class="step-title">We Watch the Calendar</h3>
+              <p class="step-desc">
+                Birthday Buddy checks the directory every day. When today matches someone's birthday,
+                the notification engine lights up automatically.
+              </p>
+            </div>
+            <div class="step-visual" aria-hidden="true">📅</div>
+          </li>
+
+          <li class="step">
+            <div class="step-number" aria-hidden="true">03</div>
+            <div class="step-content">
+              <h3 class="step-title">Group Gets the Alert</h3>
+              <p class="step-desc">
+                A cheerful WhatsApp message lands in the group chat so everyone can pile on
+                the love — right on time, every time.
+              </p>
+            </div>
+            <div class="step-visual" aria-hidden="true">🎉</div>
+          </li>
+
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="testimonials section" aria-labelledby="testimonials-heading">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Real Groups, Real Love</p>
+          <h2 id="testimonials-heading" class="section-title">What Groups Are Saying</h2>
+        </div>
+        <div class="testimonials-grid">
+
+          <blockquote class="testimonial-card">
+            <p class="testimonial-text">
+              "Our group chat went from silent to full of birthday wishes every single week. Birthday Buddy is legendary."
+            </p>
+            <footer class="testimonial-author">
+              <span class="author-avatar" aria-hidden="true">🦊</span>
+              <div>
+                <cite class="author-name">Sofia R.</cite>
+                <span class="author-group">Uni Friends Group · 24 members</span>
+              </div>
+            </footer>
+          </blockquote>
+
+          <blockquote class="testimonial-card testimonial-card--featured">
+            <p class="testimonial-text">
+              "We set it up in 5 minutes for our whole family WhatsApp. Grandma got 47 messages on her birthday. She cried happy tears."
+            </p>
+            <footer class="testimonial-author">
+              <span class="author-avatar" aria-hidden="true">🐻</span>
+              <div>
+                <cite class="author-name">Marco T.</cite>
+                <span class="author-group">Family Group · 31 members</span>
+              </div>
+            </footer>
+          </blockquote>
+
+          <blockquote class="testimonial-card">
+            <p class="testimonial-text">
+              "No more awkward 'oh I forgot, happy belated!' texts. Birthday Buddy keeps our work team closer."
+            </p>
+            <footer class="testimonial-author">
+              <span class="author-avatar" aria-hidden="true">🦁</span>
+              <div>
+                <cite class="author-name">Priya K.</cite>
+                <span class="author-group">Work Team · 18 members</span>
+              </div>
+            </footer>
+          </blockquote>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT FORM ===== -->
+    <section class="contact section" id="contact" aria-labelledby="contact-heading">
+      <div class="container contact-inner">
+        <div class="contact-info">
+          <p class="section-label">Get Started</p>
+          <h2 id="contact-heading" class="section-title">Register Your<br />Birthday Today</h2>
+          <p class="contact-desc">
+            Add yourself to your group's birthday directory and start celebrating together.
+            It only takes a minute.
+          </p>
+          <ul class="contact-perks" role="list">
+            <li><span aria-hidden="true">✓</span> Instant registration</li>
+            <li><span aria-hidden="true">✓</span> WhatsApp notifications on your day</li>
+            <li><span aria-hidden="true">✓</span> Your data stays private</li>
+          </ul>
+        </div>
+
+        <div class="form-wrapper">
+          <form class="contact-form" id="birthday-form" novalidate aria-label="Birthday registration form">
+            <div class="form-group">
+              <label for="full-name">Full Name <span class="required" aria-label="required">*</span></label>
+              <input
+                type="text"
+                id="full-name"
+                name="fullName"
+                placeholder="e.g. Maria Gonzalez"
+                autocomplete="name"
+                required
+                aria-required="true"
+                aria-describedby="name-error"
+              />
+              <span class="field-error" id="name-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="birthday">Birthday <span class="required" aria-label="required">*</span></label>
+              <input
+                type="date"
+                id="birthday"
+                name="birthday"
+                required
+                aria-required="true"
+                aria-describedby="birthday-error"
+              />
+              <span class="field-error" id="birthday-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="whatsapp">WhatsApp Number <span class="required" aria-label="required">*</span></label>
+              <input
+                type="tel"
+                id="whatsapp"
+                name="whatsapp"
+                placeholder="+1 555 000 0000"
+                autocomplete="tel"
+                required
+                aria-required="true"
+                aria-describedby="whatsapp-error whatsapp-hint"
+              />
+              <span class="field-hint" id="whatsapp-hint">Include country code (e.g. +44, +1, +55)</span>
+              <span class="field-error" id="whatsapp-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="group-name">Group Name <span class="required" aria-label="required">*</span></label>
+              <input
+                type="text"
+                id="group-name"
+                name="groupName"
+                placeholder="e.g. The Avengers 🦸"
+                required
+                aria-required="true"
+                aria-describedby="group-error"
+              />
+              <span class="field-error" id="group-error" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Custom Birthday Wish <span class="optional">(optional)</span></label>
+              <textarea
+                id="message"
+                name="message"
+                rows="3"
+                placeholder="e.g. Wishing you all the cake and zero Mondays! 🎂"
+                aria-describedby="message-hint"
+              ></textarea>
+              <span class="field-hint" id="message-hint">This message will be sent to the group on your birthday.</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full">
+              <span class="btn-text">Register My Birthday 🎂</span>
+              <span class="btn-loading" aria-hidden="true">Sending...</span>
+            </button>
+
+            <div class="form-success" id="form-success" role="alert" aria-live="polite" hidden>
+              <span aria-hidden="true">🎉</span>
+              <strong>You're on the list!</strong> We'll send a WhatsApp alert to your group on your birthday.
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo" aria-label="Birthday Buddy home">
+          <span class="logo-icon" aria-hidden="true">🎂</span>
+          <span class="logo-text">Birthday<span class="logo-accent">Buddy</span></span>
+        </a>
+        <p class="footer-tagline">Making every birthday count, one WhatsApp at a time.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <ul role="list">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#contact">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; <span id="footer-year"></span> Birthday Buddy. Made with <span aria-label="love">❤️</span> for celebration.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
