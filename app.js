@@ -8,6 +8,16 @@
 
 const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID';
 
+/* EmailJS config — sign up free at https://www.emailjs.com
+   then replace these values with your own:
+   - Public Key:   Account → API Keys
+   - Service ID:   Email Services → your connected email
+   - Template ID:  Email Templates → create one with variables:
+       {{to_name}}, {{to_email}}, {{group_name}}, {{birthday}}   */
+const EMAILJS_PUBLIC_KEY  = 'YOUR_EMAILJS_PUBLIC_KEY';
+const EMAILJS_SERVICE_ID  = 'YOUR_EMAILJS_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_EMAILJS_TEMPLATE_ID';
+
 /* === Footer year === */
 document.getElementById('footer-year').textContent = new Date().getFullYear();
 
@@ -196,6 +206,7 @@ const fields = {
   fullName:  { el: form.querySelector('#full-name'),  errorEl: form.querySelector('#name-error') },
   birthday:  { el: form.querySelector('#birthday'),   errorEl: form.querySelector('#birthday-error') },
   whatsapp:  { el: form.querySelector('#whatsapp'),   errorEl: form.querySelector('#whatsapp-error') },
+  email:     { el: form.querySelector('#email'),      errorEl: form.querySelector('#email-error') },
   groupName: { el: form.querySelector('#group-name'), errorEl: form.querySelector('#group-error') },
 };
 
@@ -214,6 +225,10 @@ function validateField(name, el, errorEl) {
     const raw = el.value.trim();
     if (!raw) message = 'Please enter your WhatsApp number.';
     else if (!/^\+?[\d\s\-().]{7,20}$/.test(raw)) message = 'Please enter a valid phone number (e.g. +1 555 000 0000).';
+  }
+  if (name === 'email') {
+    if (!el.value.trim()) message = 'Please enter your email address.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim())) message = 'Please enter a valid email address.';
   }
   if (name === 'groupName') {
     if (!el.value.trim()) message = 'Please enter your WhatsApp group name.';
@@ -246,7 +261,23 @@ form.addEventListener('submit', async e => {
   }
 
   submitBtn.classList.add('is-loading');
-  await new Promise(r => setTimeout(r, 1500));
+
+  // Send confirmation email via EmailJS
+  if (EMAILJS_PUBLIC_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') {
+    try {
+      emailjs.init(EMAILJS_PUBLIC_KEY);
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        to_name:    fields.fullName.el.value.trim(),
+        to_email:   fields.email.el.value.trim(),
+        group_name: fields.groupName.el.value.trim(),
+        birthday:   new Date(fields.birthday.el.value).toLocaleDateString(undefined, { month: 'long', day: 'numeric' }),
+      });
+    } catch (err) {
+      console.error('EmailJS error:', err);
+    }
+  } else {
+    await new Promise(r => setTimeout(r, 800));
+  }
 
   // Save member data into the group if arriving via invite link
   if (joinGroupId) {
@@ -256,6 +287,7 @@ form.addEventListener('submit', async e => {
         name:      fields.fullName.el.value.trim(),
         birthday:  fields.birthday.el.value,
         whatsapp:  fields.whatsapp.el.value.trim(),
+        email:     fields.email.el.value.trim(),
         groupName: fields.groupName.el.value.trim(),
         joinedAt:  new Date().toISOString(),
       });
