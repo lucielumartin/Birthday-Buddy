@@ -37,6 +37,18 @@ function decodeJWT(token) {
 })();
 
 /* =============================================
+   PROFILE STORAGE
+   ============================================= */
+function getProfile() {
+  try { return JSON.parse(localStorage.getItem(`bb_profile_${getUser().sub}`)); }
+  catch { return null; }
+}
+
+function saveProfile(data) {
+  localStorage.setItem(`bb_profile_${getUser().sub}`, JSON.stringify(data));
+}
+
+/* =============================================
    GROUP STORAGE
    ============================================= */
 function storageKey() {
@@ -82,6 +94,63 @@ function isTodaysBirthday(dateStr) {
   const today = new Date();
   const [, month, day] = dateStr.split('-');
   return parseInt(month) === today.getMonth() + 1 && parseInt(day) === today.getDate();
+}
+
+/* =============================================
+   PROFILE CARD UI
+   ============================================= */
+function initProfileCard() {
+  const card        = document.getElementById('profile-card');
+  const form        = document.getElementById('profile-form');
+  const nameInput   = document.getElementById('profile-name');
+  const bdayInput   = document.getElementById('profile-birthday');
+  const waInput     = document.getElementById('profile-whatsapp');
+  const statusBadge = document.getElementById('profile-status');
+  const saveBtn     = document.getElementById('profile-save-btn');
+
+  const profile = getProfile();
+  const user    = getUser();
+
+  card.hidden = false;
+
+  if (profile) {
+    // Already complete — show read-only summary
+    nameInput.value   = profile.name;
+    bdayInput.value   = profile.birthday;
+    waInput.value     = profile.whatsapp;
+    [nameInput, bdayInput, waInput].forEach(el => el.setAttribute('readonly', 'true'));
+    saveBtn.hidden    = true;
+    statusBadge.hidden = false;
+    card.classList.add('profile-card--complete');
+  } else {
+    // Pre-fill name from Google
+    if (user?.name) nameInput.value = user.name;
+  }
+
+  // Validation helpers
+  function validateProfileField(el, errorId, check, msg) {
+    const err = document.getElementById(errorId);
+    if (!check(el.value)) { err.textContent = msg; el.setAttribute('aria-invalid', 'true'); return false; }
+    err.textContent = ''; el.setAttribute('aria-invalid', 'false'); return true;
+  }
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const okName = validateProfileField(nameInput, 'profile-name-error',    v => v.trim().length >= 2, 'Please enter your full name.');
+    const okBday = validateProfileField(bdayInput, 'profile-birthday-error', v => !!v, 'Please enter your birthday.');
+    const okWa   = validateProfileField(waInput,   'profile-whatsapp-error', v => /^\+?[\d\s\-().]{7,20}$/.test(v.trim()), 'Please enter a valid number.');
+    if (!okName || !okBday || !okWa) return;
+
+    saveBtn.classList.add('is-loading');
+    setTimeout(() => {
+      saveProfile({ name: nameInput.value.trim(), birthday: bdayInput.value, whatsapp: waInput.value.trim() });
+      saveBtn.classList.remove('is-loading');
+      saveBtn.hidden = true;
+      statusBadge.hidden = false;
+      card.classList.add('profile-card--complete');
+      [nameInput, bdayInput, waInput].forEach(el => el.setAttribute('readonly', 'true'));
+    }, 500);
+  });
 }
 
 /* =============================================
@@ -249,10 +318,20 @@ createForm.addEventListener('submit', e => {
   submitBtn.classList.add('is-loading');
 
   setTimeout(() => {
-    const groups = getGroups();
+    const groups  = getGroups();
     const newGroup = { id: generateId(), name, createdAt: new Date().toISOString() };
     groups.unshift(newGroup);
     saveGroups(groups);
+
+    // Auto-add the owner's saved profile as the first member
+    const profile = getProfile();
+    if (profile) {
+      localStorage.setItem(`bb_members_${newGroup.id}`, JSON.stringify([{
+        ...profile,
+        groupName: name,
+        joinedAt: new Date().toISOString(),
+      }]));
+    }
 
     submitBtn.classList.remove('is-loading');
     closeCreateModal();
@@ -427,4 +506,5 @@ document.getElementById('signout-btn').addEventListener('click', () => {
    INIT
    ============================================= */
 populateUserInfo();
+initProfileCard();
 renderGroups();

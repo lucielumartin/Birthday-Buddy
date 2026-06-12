@@ -54,6 +54,41 @@
         </button>
       </section>
 
+      <!-- Profile completion card -->
+      <section class="profile-card" id="profile-card" aria-labelledby="profile-card-heading" hidden>
+        <div class="profile-card-header">
+          <div>
+            <h2 id="profile-card-heading" class="profile-card-title">Complete Your Profile</h2>
+            <p class="profile-card-desc">Save your birthday once — you'll be auto-added to every group you create.</p>
+          </div>
+          <span class="profile-status" id="profile-status" hidden>✓ Profile saved</span>
+        </div>
+        <form class="profile-form" id="profile-form" novalidate>
+          <div class="profile-fields">
+            <div class="form-group">
+              <label for="profile-name">Full Name <span class="required" aria-label="required">*</span></label>
+              <input type="text" id="profile-name" name="name" placeholder="e.g. Maria Gonzalez" autocomplete="name" required aria-required="true" aria-describedby="profile-name-error" />
+              <span class="field-error" id="profile-name-error" role="alert" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+              <label for="profile-birthday">Birthday <span class="required" aria-label="required">*</span></label>
+              <input type="date" id="profile-birthday" name="birthday" required aria-required="true" aria-describedby="profile-birthday-error" />
+              <span class="field-error" id="profile-birthday-error" role="alert" aria-live="polite"></span>
+            </div>
+            <div class="form-group">
+              <label for="profile-whatsapp">WhatsApp Number <span class="required" aria-label="required">*</span></label>
+              <input type="tel" id="profile-whatsapp" name="whatsapp" placeholder="+1 555 000 0000" autocomplete="tel" required aria-required="true" aria-describedby="profile-whatsapp-error profile-whatsapp-hint" />
+              <span class="field-hint" id="profile-whatsapp-hint">Include country code (e.g. +44, +1, +55)</span>
+              <span class="field-error" id="profile-whatsapp-error" role="alert" aria-live="polite"></span>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" id="profile-save-btn">
+            <span class="btn-text">Save My Profile 🎂</span>
+            <span class="btn-loading" aria-hidden="true">Saving...</span>
+          </button>
+        </form>
+      </section>
+
       <!-- Groups section -->
       <section class="dash-groups" aria-labelledby="groups-heading">
         <div class="dash-groups-header">
