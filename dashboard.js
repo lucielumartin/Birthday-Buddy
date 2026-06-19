@@ -104,7 +104,7 @@ function initProfileCard() {
   const form        = document.getElementById('profile-form');
   const nameInput   = document.getElementById('profile-name');
   const bdayInput   = document.getElementById('profile-birthday');
-  const waInput     = document.getElementById('profile-whatsapp');
+  const emailInput  = document.getElementById('profile-email');
   const statusBadge = document.getElementById('profile-status');
   const saveBtn     = document.getElementById('profile-save-btn');
 
@@ -117,8 +117,8 @@ function initProfileCard() {
     // Already complete — show read-only summary
     nameInput.value   = profile.name;
     bdayInput.value   = profile.birthday;
-    waInput.value     = profile.whatsapp;
-    [nameInput, bdayInput, waInput].forEach(el => el.setAttribute('readonly', 'true'));
+    emailInput.value  = profile.email;
+    [nameInput, bdayInput, emailInput].forEach(el => el.setAttribute('readonly', 'true'));
     saveBtn.hidden    = true;
     statusBadge.hidden = false;
     card.classList.add('profile-card--complete');
@@ -138,17 +138,17 @@ function initProfileCard() {
     e.preventDefault();
     const okName = validateProfileField(nameInput, 'profile-name-error',    v => v.trim().length >= 2, 'Please enter your full name.');
     const okBday = validateProfileField(bdayInput, 'profile-birthday-error', v => !!v, 'Please enter your birthday.');
-    const okWa   = validateProfileField(waInput,   'profile-whatsapp-error', v => /^\+?[\d\s\-().]{7,20}$/.test(v.trim()), 'Please enter a valid number.');
-    if (!okName || !okBday || !okWa) return;
+    const okEmail = validateProfileField(emailInput, 'profile-email-error', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()), 'Please enter a valid email address.');
+    if (!okName || !okBday || !okEmail) return;
 
     saveBtn.classList.add('is-loading');
     setTimeout(() => {
-      saveProfile({ name: nameInput.value.trim(), birthday: bdayInput.value, whatsapp: waInput.value.trim() });
+      saveProfile({ name: nameInput.value.trim(), birthday: bdayInput.value, email: emailInput.value.trim() });
       saveBtn.classList.remove('is-loading');
       saveBtn.hidden = true;
       statusBadge.hidden = false;
       card.classList.add('profile-card--complete');
-      [nameInput, bdayInput, waInput].forEach(el => el.setAttribute('readonly', 'true'));
+      [nameInput, bdayInput, emailInput].forEach(el => el.setAttribute('readonly', 'true'));
     }, 500);
   });
 }
@@ -421,7 +421,7 @@ function openMembersModal(groupId, groupName) {
               </div>
               <div class="member-meta">
                 <span>🗓 ${formatBirthday(m.birthday)}</span>
-                <span>📱 ${escapeHtml(m.whatsapp)}</span>
+                <span>📧 ${escapeHtml(m.email)}</span>
               </div>
             </div>
           </li>

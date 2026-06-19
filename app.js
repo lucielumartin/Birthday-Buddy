@@ -205,7 +205,6 @@ const successMsg = document.getElementById('form-success');
 const fields = {
   fullName:  { el: form.querySelector('#full-name'),  errorEl: form.querySelector('#name-error') },
   birthday:  { el: form.querySelector('#birthday'),   errorEl: form.querySelector('#birthday-error') },
-  whatsapp:  { el: form.querySelector('#whatsapp'),   errorEl: form.querySelector('#whatsapp-error') },
   email:     { el: form.querySelector('#email'),      errorEl: form.querySelector('#email-error') },
   groupName: { el: form.querySelector('#group-name'), errorEl: form.querySelector('#group-error') },
 };
@@ -221,17 +220,12 @@ function validateField(name, el, errorEl) {
     if (!el.value) message = 'Please enter your birthday.';
     else if (isNaN(new Date(el.value).getTime())) message = 'Please enter a valid date.';
   }
-  if (name === 'whatsapp') {
-    const raw = el.value.trim();
-    if (!raw) message = 'Please enter your WhatsApp number.';
-    else if (!/^\+?[\d\s\-().]{7,20}$/.test(raw)) message = 'Please enter a valid phone number (e.g. +1 555 000 0000).';
-  }
   if (name === 'email') {
     if (!el.value.trim()) message = 'Please enter your email address.';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim())) message = 'Please enter a valid email address.';
   }
   if (name === 'groupName') {
-    if (!el.value.trim()) message = 'Please enter your WhatsApp group name.';
+    if (!el.value.trim()) message = 'Please enter your group name.';
     else if (el.value.trim().length < 2) message = 'Group name must be at least 2 characters.';
   }
 
@@ -286,7 +280,6 @@ form.addEventListener('submit', async e => {
       members.push({
         name:      fields.fullName.el.value.trim(),
         birthday:  fields.birthday.el.value,
-        whatsapp:  fields.whatsapp.el.value.trim(),
         email:     fields.email.el.value.trim(),
         groupName: fields.groupName.el.value.trim(),
         joinedAt:  new Date().toISOString(),
