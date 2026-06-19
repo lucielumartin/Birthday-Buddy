@@ -49,19 +49,19 @@
           </h1>
           <p class="dash-subtitle">Manage your birthday groups and invite your crew to celebrate.</p>
         </div>
-        <button class="btn btn-primary" id="new-group-btn-hero" aria-label="Create a new group">
-          + New Group
-        </button>
       </section>
 
       <!-- Profile completion card -->
       <section class="profile-card" id="profile-card" aria-labelledby="profile-card-heading" hidden>
         <div class="profile-card-header">
           <div>
-            <h2 id="profile-card-heading" class="profile-card-title">Complete Your Profile</h2>
+            <h2 id="profile-card-heading" class="profile-card-title">My Profile</h2>
             <p class="profile-card-desc">Save your birthday once — you'll be auto-added to every group you create.</p>
           </div>
-          <span class="profile-status" id="profile-status" hidden>✓ Profile saved</span>
+          <div class="profile-header-actions">
+            <span class="profile-status" id="profile-status" hidden>✓ Saved</span>
+            <button class="btn btn-ghost btn-sm" id="profile-edit-btn" hidden>Edit</button>
+          </div>
         </div>
         <form class="profile-form" id="profile-form" novalidate>
           <div class="profile-fields">
@@ -91,8 +91,11 @@
       <!-- Groups section -->
       <section class="dash-groups" aria-labelledby="groups-heading">
         <div class="dash-groups-header">
-          <h2 id="groups-heading" class="dash-section-title">My Groups</h2>
-          <span class="group-count-badge" id="group-count" aria-live="polite" aria-atomic="true"></span>
+          <div class="dash-groups-header-left">
+            <h2 id="groups-heading" class="dash-section-title">My Groups</h2>
+            <span class="group-count-badge" id="group-count" aria-live="polite" aria-atomic="true"></span>
+          </div>
+          <button class="btn btn-primary btn-sm" id="new-group-btn-header" aria-label="Create a new group">+ New Group</button>
         </div>
 
         <!-- Empty state -->

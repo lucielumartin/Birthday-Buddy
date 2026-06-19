@@ -106,6 +106,7 @@ function initProfileCard() {
   const bdayInput   = document.getElementById('profile-birthday');
   const emailInput  = document.getElementById('profile-email');
   const statusBadge = document.getElementById('profile-status');
+  const editBtn     = document.getElementById('profile-edit-btn');
   const saveBtn     = document.getElementById('profile-save-btn');
 
   const profile = getProfile();
@@ -113,19 +114,33 @@ function initProfileCard() {
 
   card.hidden = false;
 
-  if (profile) {
-    // Already complete — show read-only summary
-    nameInput.value   = profile.name;
-    bdayInput.value   = profile.birthday;
-    emailInput.value  = profile.email;
+  function setReadOnly() {
     [nameInput, bdayInput, emailInput].forEach(el => el.setAttribute('readonly', 'true'));
     saveBtn.hidden    = true;
     statusBadge.hidden = false;
+    editBtn.hidden    = false;
     card.classList.add('profile-card--complete');
+  }
+
+  function setEditable() {
+    [nameInput, bdayInput, emailInput].forEach(el => el.removeAttribute('readonly'));
+    saveBtn.hidden    = false;
+    statusBadge.hidden = true;
+    editBtn.hidden    = true;
+    card.classList.remove('profile-card--complete');
+    nameInput.focus();
+  }
+
+  if (profile) {
+    nameInput.value   = profile.name;
+    bdayInput.value   = profile.birthday;
+    emailInput.value  = profile.email;
+    setReadOnly();
   } else {
-    // Pre-fill name from Google
     if (user?.name) nameInput.value = user.name;
   }
+
+  editBtn.addEventListener('click', setEditable);
 
   // Validation helpers
   function validateProfileField(el, errorId, check, msg) {
@@ -145,10 +160,7 @@ function initProfileCard() {
     setTimeout(() => {
       saveProfile({ name: nameInput.value.trim(), birthday: bdayInput.value, email: emailInput.value.trim() });
       saveBtn.classList.remove('is-loading');
-      saveBtn.hidden = true;
-      statusBadge.hidden = false;
-      card.classList.add('profile-card--complete');
-      [nameInput, bdayInput, emailInput].forEach(el => el.setAttribute('readonly', 'true'));
+      setReadOnly();
     }, 500);
   });
 }
@@ -301,7 +313,7 @@ function closeCreateModal() {
 }
 
 document.getElementById('create-modal-close').addEventListener('click', closeCreateModal);
-document.getElementById('new-group-btn-hero').addEventListener('click', openCreateModal);
+document.getElementById('new-group-btn-header').addEventListener('click', openCreateModal);
 document.getElementById('new-group-btn-empty').addEventListener('click', openCreateModal);
 
 createForm.addEventListener('submit', e => {

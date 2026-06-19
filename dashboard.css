@@ -111,6 +111,12 @@
   margin-bottom: 1.5rem;
   flex-wrap: wrap;
 }
+.profile-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
 .profile-card-title {
   font-family: var(--font-display);
   font-size: 1.5rem;
@@ -177,8 +183,14 @@
 .dash-groups-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 1rem;
   margin-bottom: 1.5rem;
+}
+.dash-groups-header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 .dash-section-title {
   font-family: var(--font-display);
