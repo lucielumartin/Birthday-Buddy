@@ -335,6 +335,22 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   margin-bottom: 3rem;
 }
 
+.hero-auth {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.hero-auth-or {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
 .hero-stats {
   display: flex;
   align-items: center;
@@ -852,10 +868,6 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* =============================================
    NAV AUTH STATES
    ============================================= */
-#nav-auth-signed-out { display: flex; align-items: center; }
-
-/* Google's rendered button sits inside here — wrap controls sizing */
-#google-signin-container > div { border-radius: var(--radius-pill) !important; overflow: hidden; }
 
 .nav-user-link {
   display: flex;
@@ -939,4 +951,100 @@ input[data-locked="true"] {
     transition-duration: 0.01ms !important;
   }
   .marquee-track { animation: none; }
+}
+
+/* =============================================
+   HERO AUTH SIGNIN CONTAINER
+   ============================================= */
+#hero-signin-container > div { border-radius: var(--radius-pill) !important; overflow: hidden; }
+.hero-auth[hidden] { display: none; }
+
+/* Mobile hero auth */
+@media (max-width: 640px) {
+  .hero-auth { flex-direction: column; align-items: center; }
+  .hero-auth .btn { width: 100%; max-width: 320px; }
+}
+
+/* =============================================
+   GROUP BIRTHDAY VIEW (post-registration)
+   ============================================= */
+.group-view { background: var(--color-bg-card); }
+.group-view[hidden] { display: none; }
+
+.group-members-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.member-bday-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition), transform var(--transition);
+}
+.member-bday-card:hover { border-color: rgba(217,70,239,0.4); transform: translateY(-2px); }
+
+.member-bday-initial {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.member-bday-info { display: flex; flex-direction: column; gap: 0.2rem; min-width: 0; }
+.member-bday-name { font-weight: 700; font-size: 1rem; }
+.member-bday-date {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+.today-badge {
+  color: var(--color-accent);
+  font-weight: 700;
+}
+
+.group-members-empty {
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-text-muted);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  grid-column: 1 / -1;
+}
+
+.group-view-cta { text-align: center; }
+.group-view-cta[hidden] { display: none; }
+
+.group-view-cta-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background: var(--color-bg);
+  border: 1px solid rgba(251,191,36,0.3);
+  border-radius: var(--radius-lg);
+  padding: clamp(2rem, 4vw, 3rem) clamp(2rem, 5vw, 4rem);
+  max-width: 480px;
+}
+.group-view-cta-icon { font-size: 2.5rem; }
+.group-view-cta-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  letter-spacing: 0.04em;
+}
+.group-view-cta-desc { color: var(--color-text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+@media (max-width: 640px) {
+  .group-members-grid { grid-template-columns: 1fr; }
+  .group-view-cta-card { width: 100%; }
 }

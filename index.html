@@ -30,7 +30,6 @@
         <li><a href="#features">Features</a></li>
         <li><a href="#how-it-works">How It Works</a></li>
         <li><a href="#contact">Contact</a></li>
-        <li id="nav-auth-signed-out"><div id="google-signin-container"></div></li>
         <li id="nav-auth-signed-in" hidden>
           <a href="dashboard.html" class="nav-user-link" aria-label="Go to your dashboard">
             <img id="nav-avatar" src="" alt="" class="nav-avatar" width="32" height="32" />
@@ -74,8 +73,15 @@
           Birthday Buddy connects your group with a shared birthday directory.
           Register once — get automatic email reminders every time someone celebrates their big day.
         </p>
-        <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary">Register Your Birthday</a>
+        <!-- Signed-out: sign in or guest -->
+        <div class="hero-auth" id="hero-auth-signed-out">
+          <div id="hero-signin-container"></div>
+          <span class="hero-auth-or" aria-hidden="true">or</span>
+          <button class="btn btn-ghost" id="guest-btn">Continue as Guest</button>
+        </div>
+        <!-- Signed-in: go to dashboard -->
+        <div class="hero-auth" id="hero-auth-signed-in" hidden>
+          <a href="dashboard.html" class="btn btn-primary">Go to Dashboard →</a>
           <a href="#how-it-works" class="btn btn-ghost">See How It Works</a>
         </div>
         <div class="hero-stats" role="list" aria-label="Key stats">
@@ -343,6 +349,25 @@
     </section>
 
   </main>
+
+  <!-- ===== GROUP BIRTHDAY VIEW (shown after guest registers via invite) ===== -->
+  <section class="group-view section" id="group-view" hidden aria-labelledby="group-view-heading">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Your Group</p>
+        <h2 id="group-view-heading" class="section-title">Birthdays in<br /><span id="group-view-name"></span></h2>
+      </div>
+      <div id="group-members-list" class="group-members-grid"></div>
+      <div class="group-view-cta" id="group-view-cta">
+        <div class="group-view-cta-card">
+          <div class="group-view-cta-icon" aria-hidden="true">🎂</div>
+          <h3 class="group-view-cta-title">Want to create your own group?</h3>
+          <p class="group-view-cta-desc">Sign in with Google to create and manage birthday groups for your friends, family, or team.</p>
+          <div id="group-view-signin"></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer" role="contentinfo">

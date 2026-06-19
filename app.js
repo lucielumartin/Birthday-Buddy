@@ -41,16 +41,31 @@ function handleCredentialResponse(response) {
   window.location.href = 'dashboard.html';
 }
 
-function initGoogleAuth() {
+function makeMockSignInBtn(container) {
+  if (!container) return;
+  const btn = document.createElement('button');
+  btn.className = 'btn btn-ghost';
+  btn.style.cssText = 'border-color:rgba(217,70,239,0.5);';
+  btn.innerHTML = '🔑 Sign In (Dev)';
+  btn.title = 'Dev mode: replace GOOGLE_CLIENT_ID in app.js and dashboard.js';
+  btn.addEventListener('click', () => {
+    localStorage.setItem('bb_user', JSON.stringify({
+      sub: 'dev-user-001', name: 'Dev User', given_name: 'Dev',
+      email: 'dev@birthdaybuddy.app', picture: '',
+    }));
+    window.location.href = 'dashboard.html';
+  });
+  container.appendChild(btn);
+}
+
+function initGoogleAuth(containerId = 'hero-signin-container') {
   if (typeof google === 'undefined' || !google?.accounts?.id) {
-    // GIS not loaded yet — retry once it fires
-    window.addEventListener('load', initGoogleAuth, { once: true });
+    window.addEventListener('load', () => initGoogleAuth(containerId), { once: true });
     return;
   }
 
   if (GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID') {
-    // Dev mode: show a mock sign-in button instead of Google's
-    showDevSignIn();
+    makeMockSignInBtn(document.getElementById(containerId));
     return;
   }
 
@@ -60,11 +75,11 @@ function initGoogleAuth() {
     auto_select: false,
   });
 
-  const container = document.getElementById('google-signin-container');
+  const container = document.getElementById(containerId);
   if (container) {
     google.accounts.id.renderButton(container, {
       theme: 'filled_black',
-      size: 'medium',
+      size: 'large',
       shape: 'pill',
       text: 'signin_with',
       logo_alignment: 'left',
@@ -72,56 +87,39 @@ function initGoogleAuth() {
   }
 }
 
-/* Dev-mode mock sign-in (no real Google Client ID configured) */
-function showDevSignIn() {
-  const container = document.getElementById('google-signin-container');
-  if (!container) return;
-
-  const btn = document.createElement('button');
-  btn.className = 'btn btn-sm btn-ghost';
-  btn.style.cssText = 'border-color:rgba(217,70,239,0.5);font-size:0.82rem;gap:0.4rem;';
-  btn.innerHTML = '🔑 Sign In (Dev)';
-  btn.title = 'Dev mode: replace GOOGLE_CLIENT_ID in app.js and dashboard.js';
-  btn.addEventListener('click', () => {
-    const mockUser = {
-      sub: 'dev-user-001',
-      name: 'Dev User',
-      given_name: 'Dev',
-      email: 'dev@birthdaybuddy.app',
-      picture: '',
-    };
-    localStorage.setItem('bb_user', JSON.stringify(mockUser));
-    window.location.href = 'dashboard.html';
-  });
-  container.appendChild(btn);
-}
-
 /* =============================================
-   AUTH STATE — update nav
+   AUTH STATE — update nav + hero
    ============================================= */
 function updateNavAuthState() {
   const user = getUser();
-  const signedOut = document.getElementById('nav-auth-signed-out');
-  const signedIn  = document.getElementById('nav-auth-signed-in');
-
-  if (!signedOut || !signedIn) return;
+  const navSignedIn       = document.getElementById('nav-auth-signed-in');
+  const heroSignedOut     = document.getElementById('hero-auth-signed-out');
+  const heroSignedIn      = document.getElementById('hero-auth-signed-in');
 
   if (user) {
-    signedOut.hidden = true;
-    signedIn.hidden  = false;
+    if (navSignedIn)   navSignedIn.hidden   = false;
+    if (heroSignedOut) heroSignedOut.hidden  = true;
+    if (heroSignedIn)  heroSignedIn.hidden   = false;
 
     const avatar = document.getElementById('nav-avatar');
-    if (user.picture) { avatar.src = user.picture; avatar.alt = user.name || ''; }
-    else avatar.style.display = 'none';
+    if (avatar && user.picture) { avatar.src = user.picture; avatar.alt = user.name || ''; }
+    else if (avatar) avatar.style.display = 'none';
 
     const nameEl = document.getElementById('nav-username');
     if (nameEl) nameEl.textContent = user.given_name || user.name?.split(' ')[0] || 'You';
   } else {
-    signedOut.hidden = false;
-    signedIn.hidden  = true;
+    if (navSignedIn)   navSignedIn.hidden   = true;
+    if (heroSignedOut) heroSignedOut.hidden  = false;
+    if (heroSignedIn)  heroSignedIn.hidden   = true;
     initGoogleAuth();
   }
 }
+
+/* Guest button — scroll to form (or how-it-works if no invite) */
+document.getElementById('guest-btn')?.addEventListener('click', () => {
+  const target = joinGroupId ? '#contact' : '#how-it-works';
+  document.querySelector(target)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
 
 /* =============================================
    JOIN FLOW — invite link handler
@@ -295,7 +293,73 @@ form.addEventListener('submit', async e => {
   successMsg.hidden = false;
   successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   setTimeout(() => { successMsg.hidden = true; }, 8000);
+
+  if (joinGroupId) {
+    setTimeout(() => renderGroupView(joinGroupId, decodeURIComponent(joinGroupName || '')), 600);
+  }
 });
+
+/* =============================================
+   GROUP BIRTHDAY VIEW (guest post-registration)
+   ============================================= */
+function escapeHtml(str) {
+  return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function formatBirthday(dateStr) {
+  const [, month, day] = dateStr.split('-');
+  const d = new Date(2000, parseInt(month) - 1, parseInt(day));
+  return d.toLocaleDateString(undefined, { month: 'long', day: 'numeric' });
+}
+
+function isTodaysBirthday(dateStr) {
+  const today = new Date();
+  const [, month, day] = dateStr.split('-');
+  return parseInt(month) === today.getMonth() + 1 && parseInt(day) === today.getDate();
+}
+
+function renderGroupView(groupId, groupName) {
+  const section  = document.getElementById('group-view');
+  const nameEl   = document.getElementById('group-view-name');
+  const listEl   = document.getElementById('group-members-list');
+  const ctaEl    = document.getElementById('group-view-cta');
+  const signinEl = document.getElementById('group-view-signin');
+  if (!section || !listEl) return;
+
+  nameEl.textContent = groupName;
+
+  const members = JSON.parse(localStorage.getItem(`bb_members_${groupId}`) || '[]');
+  if (members.length === 0) {
+    listEl.innerHTML = '<p class="group-members-empty">You\'re the first one here — share the invite link to get your crew registered!</p>';
+  } else {
+    listEl.innerHTML = members.map(m => `
+      <div class="member-bday-card">
+        <div class="member-bday-initial">${escapeHtml(m.name.charAt(0).toUpperCase())}</div>
+        <div class="member-bday-info">
+          <strong class="member-bday-name">${escapeHtml(m.name)}</strong>
+          <span class="member-bday-date">🎂 ${formatBirthday(m.birthday)}${isTodaysBirthday(m.birthday) ? ' — <span class="today-badge">Today!</span>' : ''}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Show login CTA only if not already signed in
+  if (!getUser() && ctaEl && signinEl) {
+    ctaEl.hidden = false;
+    if (GOOGLE_CLIENT_ID === 'YOUR_GOOGLE_CLIENT_ID') {
+      makeMockSignInBtn(signinEl);
+    } else {
+      google.accounts.id.renderButton(signinEl, {
+        theme: 'filled_black', size: 'large', shape: 'pill', text: 'signin_with',
+      });
+    }
+  } else if (ctaEl) {
+    ctaEl.hidden = true;
+  }
+
+  section.hidden = false;
+  setTimeout(() => section.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
 
 /* =============================================
    SCROLL ANIMATIONS
