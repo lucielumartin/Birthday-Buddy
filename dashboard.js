@@ -6,7 +6,7 @@
    https://console.cloud.google.com/apis/credentials
    ============================================= */
 
-const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID';
+const GOOGLE_CLIENT_ID = '994888306541-mght883sg72ug6ds0ab6c6da5kr8msp5.apps.googleusercontent.com';
 
 /* Base URL for invite links — update this once the site is deployed.
    e.g. 'https://birthdaybuddy.app' or your GitHub Pages URL          */
