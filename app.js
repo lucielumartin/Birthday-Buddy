@@ -46,7 +46,7 @@ function makeMockSignInBtn(container) {
   const btn = document.createElement('button');
   btn.className = 'btn btn-ghost';
   btn.style.cssText = 'border-color:rgba(217,70,239,0.5);';
-  btn.innerHTML = '🔑 Sign In (Dev)';
+  btn.innerHTML = 'Sign In';
   btn.title = 'Dev mode: replace GOOGLE_CLIENT_ID in app.js and dashboard.js';
   btn.addEventListener('click', () => {
     localStorage.setItem('bb_user', JSON.stringify({
