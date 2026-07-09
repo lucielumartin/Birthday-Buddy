@@ -237,7 +237,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .hero {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(5rem, 12vw, 9rem) 0;
+  padding-block: clamp(2rem, 5vw, 4rem) 0;
 }
 
 /* Retro background decorations */
