@@ -303,11 +303,12 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   .hero-inner {
     display: grid;
     grid-template-columns: 1.05fr 0.95fr;
-    align-items: center;
+    align-items: start;
     gap: 2rem;
     text-align: left;
   }
 
+  .hero-copy .hero-title { font-size: clamp(2.6rem, 5.5vw, 4.75rem); }
   .hero-copy .hero-subtitle { margin-inline: 0; }
   .hero-copy .hero-auth,
   .hero-copy .hero-stats { justify-content: flex-start; }
@@ -316,10 +317,11 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
     display: flex;
     align-items: center;
     justify-content: center;
+    padding-top: 1.5rem;
   }
   .hero-illustration svg {
     width: 100%;
-    max-width: 340px;
+    max-width: 320px;
   }
 }
 
