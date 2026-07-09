@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found — Birthday Buddy</title>
+  <meta name="description" content="This page doesn't exist. Head back to Birthday Buddy and never miss a birthday again." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=DM+Sans:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="404.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="site-header" role="banner">
+    <nav class="nav container" aria-label="Main navigation">
+      <a href="index.html" class="logo" aria-label="Birthday Buddy home">
+        <span class="logo-icon" aria-hidden="true">🎂</span>
+        <span class="logo-text">Birthday<span class="logo-accent">Buddy</span></span>
+      </a>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html#contact">Get Started</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== 404 ===== -->
+    <section class="not-found" aria-labelledby="not-found-heading">
+      <div class="hero-bg-shapes" aria-hidden="true">
+        <span class="shape shape-1"></span>
+        <span class="shape shape-3"></span>
+      </div>
+      <div class="container not-found-inner">
+        <span class="not-found-code" aria-hidden="true">404</span>
+        <span class="not-found-cake" aria-hidden="true">🎂</span>
+        <h1 id="not-found-heading" class="not-found-title">
+          No party <em class="highlight">here.</em>
+        </h1>
+        <p class="not-found-desc">
+          The page you're looking for got its dates mixed up and never showed. Let's get you back
+          to celebrating the birthdays that matter.
+        </p>
+        <div class="not-found-actions">
+          <a href="index.html" class="btn btn-primary">Back to Home</a>
+          <a href="index.html#contact" class="btn btn-ghost">Register Your Birthday</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" aria-label="Birthday Buddy home">
+          <span class="logo-icon" aria-hidden="true">🎂</span>
+          <span class="logo-text">Birthday<span class="logo-accent">Buddy</span></span>
+        </a>
+        <p class="footer-tagline">Making every birthday count, one email at a time. Because every person in your group deserves to feel celebrated.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <ul role="list">
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="index.html#how-it-works">How It Works</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="index.html#contact">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; <span id="footer-year"></span> Birthday Buddy. Made with <span aria-label="love">❤️</span> for celebration.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
