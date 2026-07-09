@@ -689,7 +689,6 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   box-shadow: 0 0 0 3px rgba(217,70,239,0.15);
 }
 
-/* Date picker color fix */
 .form-group input[type="date"]::-webkit-calendar-picker-indicator {
   filter: invert(0.8) sepia(1) saturate(3) hue-rotate(240deg);
   cursor: pointer;
@@ -936,7 +935,6 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .join-banner-close:hover { color: var(--color-text); background: rgba(255,255,255,0.08); }
 
-/* Locked group field (pre-filled from invite link) */
 input[data-locked="true"] {
   background: rgba(6,182,212,0.06) !important;
   border-color: rgba(6,182,212,0.4) !important;

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — Birthday Buddy</title>
+  <meta name="description" content="Learn why we built Birthday Buddy — a simple, free tool for keeping communities connected through celebration." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="about.css" />
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+
+  <!-- ===== HEADER / NAV ===== -->
+  <header class="site-header" role="banner">
+    <nav class="nav container" aria-label="Main navigation">
+      <a href="index.html" class="logo" aria-label="Birthday Buddy home">
+        <span class="logo-icon" aria-hidden="true">🎂</span>
+        <span class="logo-text">Birthday<span class="logo-accent">Buddy</span></span>
+      </a>
+      <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+        <span class="hamburger" aria-hidden="true"></span>
+      </button>
+      <ul class="nav-links" id="nav-menu" role="list">
+        <li><a href="index.html#features">Features</a></li>
+        <li><a href="index.html#how-it-works">How It Works</a></li>
+        <li><a href="about.html" class="nav-active">About</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="about-hero" aria-labelledby="about-heading">
+      <div class="hero-bg-shapes" aria-hidden="true">
+        <span class="shape shape-1"></span>
+        <span class="shape shape-2"></span>
+        <span class="shape shape-3"></span>
+        <span class="shape shape-4"></span>
+      </div>
+      <div class="container about-hero-inner">
+        <p class="section-label">Our Story</p>
+        <h1 id="about-heading" class="about-hero-title">
+          Built Because<br /><span class="highlight">Birthdays Matter</span>
+        </h1>
+        <p class="about-hero-desc">
+          A simple, free tool for keeping communities connected — one birthday at a time.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== ORIGIN STORY ===== -->
+    <section class="about-story section" aria-labelledby="story-heading">
+      <div class="container about-story-inner">
+        <div class="about-story-text">
+          <p class="section-label">How It Started</p>
+          <h2 id="story-heading" class="section-title">It Started With a<br />Forgotten Birthday</h2>
+          <div class="about-prose">
+            <p>
+              A group of friends. A group chat that had gone quiet. And then — the embarrassing realisation
+              that someone's birthday had come and gone, and nobody had said a word.
+            </p>
+            <p>
+              Not because anyone didn't care. Just because life gets busy, phone contacts don't show birthdays,
+              and no one wants to be the person who has to keep track of thirty different dates.
+            </p>
+            <p>
+              So we built Birthday Buddy. A shared directory where everyone in a group registers their birthday
+              once — and then never has to worry again. The day arrives, the email goes out, the group lights up.
+              Simple as that.
+            </p>
+          </div>
+        </div>
+        <div class="about-story-visual" aria-hidden="true">
+          <div class="story-card story-card--1">
+            <span class="story-card-emoji">😬</span>
+            <p class="story-card-text">"Wait — was it yesterday?"</p>
+          </div>
+          <div class="story-card story-card--2">
+            <span class="story-card-emoji">🎂</span>
+            <p class="story-card-text">"Happy Birthday! 🎉🎉🎉"</p>
+            <span class="story-card-badge">47 messages</span>
+          </div>
+          <div class="story-card story-card--3">
+            <span class="story-card-emoji">💌</span>
+            <p class="story-card-text">Birthday reminder sent automatically</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== VALUES ===== -->
+    <section class="about-values section" aria-labelledby="values-heading">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">What We Believe</p>
+          <h2 id="values-heading" class="section-title">The Values Behind<br />Everything We Build</h2>
+        </div>
+        <div class="values-grid">
+
+          <div class="value-card">
+            <div class="value-icon" aria-hidden="true">🤝</div>
+            <h3 class="value-title">Community First</h3>
+            <p class="value-desc">
+              Groups thrive when people feel seen. A birthday message is a small thing — but it signals that
+              someone took the time to care. We make that effortless for entire communities.
+            </p>
+          </div>
+
+          <div class="value-card value-card--accent">
+            <div class="value-icon" aria-hidden="true">🎯</div>
+            <h3 class="value-title">Radical Simplicity</h3>
+            <p class="value-desc">
+              No downloads. No accounts required to view. No bloat. One form, one link, and your whole group
+              is connected. We believe the best tools get out of the way.
+            </p>
+          </div>
+
+          <div class="value-card">
+            <div class="value-icon" aria-hidden="true">🔓</div>
+            <h3 class="value-title">Free, Always</h3>
+            <p class="value-desc">
+              Celebrating the people you love shouldn't cost anything. Birthday Buddy is free forever —
+              because connection shouldn't come with a subscription fee.
+            </p>
+          </div>
+
+          <div class="value-card value-card--accent">
+            <div class="value-icon" aria-hidden="true">🔒</div>
+            <h3 class="value-title">Privacy by Default</h3>
+            <p class="value-desc">
+              Your birthday and email are used for exactly one thing: sending birthday reminders.
+              We don't sell data, we don't run ads, and we don't share your info with anyone outside your group.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BY THE NUMBERS ===== -->
+    <section class="about-numbers section" aria-labelledby="numbers-heading">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">By the Numbers</p>
+          <h2 id="numbers-heading" class="section-title">Built to Grow<br />With Your Community</h2>
+        </div>
+        <div class="numbers-grid">
+          <div class="number-item">
+            <span class="number-value">∞</span>
+            <span class="number-label">Members per group</span>
+            <p class="number-desc">No cap — whether your group has 5 people or 500, Birthday Buddy handles it.</p>
+          </div>
+          <div class="number-item number-item--accent">
+            <span class="number-value">0</span>
+            <span class="number-label">Apps to install</span>
+            <p class="number-desc">Browser-based, invite-link driven. Your group members don't need accounts to join.</p>
+          </div>
+          <div class="number-item">
+            <span class="number-value">1</span>
+            <span class="number-label">Minute to set up</span>
+            <p class="number-desc">Register your birthday, share the invite link. Done. The whole group is on board.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="testimonials section" aria-labelledby="about-testimonials-heading">
+      <div class="container">
+        <div class="section-header">
+          <p class="section-label">Real Groups, Real Love</p>
+          <h2 id="about-testimonials-heading" class="section-title">What Groups Are Saying</h2>
+        </div>
+        <div class="testimonials-grid">
+
+          <blockquote class="testimonial-card">
+            <p class="testimonial-text">
+              "Our group chat went from silent to full of birthday wishes every single week. Birthday Buddy is legendary."
+            </p>
+            <footer class="testimonial-author">
+              <span class="author-avatar" aria-hidden="true">🦊</span>
+              <div>
+                <cite class="author-name">Sofia R.</cite>
+                <span class="author-group">Uni Friends Group · 24 members</span>
+              </div>
+            </footer>
+          </blockquote>
+
+          <blockquote class="testimonial-card testimonial-card--featured">
+            <p class="testimonial-text">
+              "We set it up in 5 minutes for our whole family group. Grandma got 47 messages on her birthday. She cried happy tears."
+            </p>
+            <footer class="testimonial-author">
+              <span class="author-avatar" aria-hidden="true">🐻</span>
+              <div>
+                <cite class="author-name">Marco T.</cite>
+                <span class="author-group">Family Group · 31 members</span>
+              </div>
+            </footer>
+          </blockquote>
+
+          <blockquote class="testimonial-card">
+            <p class="testimonial-text">
+              "No more awkward 'oh I forgot, happy belated!' texts. Birthday Buddy keeps our work team closer."
+            </p>
+            <footer class="testimonial-author">
+              <span class="author-avatar" aria-hidden="true">🦁</span>
+              <div>
+                <cite class="author-name">Priya K.</cite>
+                <span class="author-group">Work Team · 18 members</span>
+              </div>
+            </footer>
+          </blockquote>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="about-cta section" aria-labelledby="about-cta-heading">
+      <div class="container about-cta-inner">
+        <p class="section-label">Ready?</p>
+        <h2 id="about-cta-heading" class="section-title">Register Your Group<br />In 60 Seconds</h2>
+        <p class="about-cta-desc">
+          Add yourself to your group's birthday directory and start celebrating together. It only takes a minute.
+        </p>
+        <div class="about-cta-actions">
+          <a href="index.html#contact" class="btn btn-primary">Register My Birthday 🎂</a>
+          <a href="index.html#how-it-works" class="btn btn-ghost">See How It Works</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo" aria-label="Birthday Buddy home">
+          <span class="logo-icon" aria-hidden="true">🎂</span>
+          <span class="logo-text">Birthday<span class="logo-accent">Buddy</span></span>
+        </a>
+        <p class="footer-tagline">Making every birthday count, one email at a time.</p>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <ul role="list">
+          <li><a href="index.html#features">Features</a></li>
+          <li><a href="index.html#how-it-works">How It Works</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="index.html#contact">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; <span id="footer-year"></span> Birthday Buddy. Made with <span aria-label="love">❤️</span> for celebration.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+    const toggle = document.querySelector('.nav-toggle');
+    const menu   = document.getElementById('nav-menu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', String(!expanded));
+        menu.classList.toggle('is-open', !expanded);
+      });
+    }
+  </script>
+</body>
+</html>
