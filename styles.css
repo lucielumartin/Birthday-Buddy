@@ -237,7 +237,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .hero {
   position: relative;
   overflow: hidden;
-  padding-block: clamp(5rem, 12vw, 9rem) 0;
+  padding-block: clamp(2rem, 5vw, 4rem) 0;
 }
 
 /* Retro background decorations */
@@ -280,11 +280,49 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   50%       { transform: translateY(-30px) scale(1.05); }
 }
 
+.illo-bob { animation: illo-bob 3.2s ease-in-out infinite; }
+.illo-bob-delay { animation: illo-bob 3.2s ease-in-out infinite -1.6s; }
+
+@keyframes illo-bob {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-6px); }
+}
+
 .hero-inner {
   position: relative;
   z-index: 1;
   text-align: center;
   padding-bottom: clamp(3rem, 6vw, 5rem);
+}
+
+.hero-illustration {
+  display: none;
+}
+
+@media (min-width: 901px) {
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: start;
+    gap: 2rem;
+    text-align: left;
+  }
+
+  .hero-copy .hero-title { font-size: clamp(2.6rem, 5.5vw, 4.75rem); }
+  .hero-copy .hero-subtitle { margin-inline: 0; }
+  .hero-copy .hero-auth,
+  .hero-copy .hero-stats { justify-content: flex-start; }
+
+  .hero-illustration {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 1.5rem;
+  }
+  .hero-illustration svg {
+    width: 100%;
+    max-width: 320px;
+  }
 }
 
 .hero-badge {
