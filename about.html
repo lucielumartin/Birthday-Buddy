@@ -16,6 +16,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="about.css" />
+  <!-- Set theme before first paint to avoid a flash of the wrong theme -->
+  <script>
+    (function () {
+      var stored = localStorage.getItem('bb_theme');
+      var theme = stored || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <!-- Google Identity Services -->
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
@@ -38,6 +46,11 @@
         <li><a href="index.html#how-it-works">How It Works</a></li>
         <li><a href="about.html" class="nav-active">About</a></li>
         <li><a href="index.html#contact">Register</a></li>
+        <li class="nav-theme-item">
+          <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+            <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+          </button>
+        </li>
       </ul>
     </nav>
   </header>
@@ -334,6 +347,28 @@
 
   <script>
     document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // Theme toggle (light / dark)
+    (function initThemeToggle() {
+      const btn  = document.getElementById('theme-toggle');
+      const icon = btn?.querySelector('.theme-toggle-icon');
+      if (!btn || !icon) return;
+
+      function sync() {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        icon.textContent = isLight ? '☀️' : '🌙';
+        btn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+        btn.setAttribute('aria-pressed', String(isLight));
+      }
+
+      sync();
+      btn.addEventListener('click', () => {
+        const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('bb_theme', next);
+        sync();
+      });
+    })();
 
     // Scroll-reveal animation for value + testimonial cards
     const animatables = document.querySelectorAll('.value-card, .testimonial-card');

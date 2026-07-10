@@ -284,3 +284,11 @@
   .about-cta-actions { flex-direction: column; align-items: center; }
   .about-cta-actions .btn { width: 100%; max-width: 320px; }
 }
+
+/* =============================================
+   LIGHT THEME OVERRIDES
+   ============================================= */
+[data-theme="light"] .story-photo { box-shadow: 0 16px 32px rgba(30,27,75,0.15); }
+[data-theme="light"] .about-numbers {
+  background: linear-gradient(180deg, var(--color-bg) 0%, #F3E0FA 100%);
+}

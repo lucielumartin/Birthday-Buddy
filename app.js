@@ -22,6 +22,30 @@ const EMAILJS_TEMPLATE_ID = 'YOUR_EMAILJS_TEMPLATE_ID';
 document.getElementById('footer-year').textContent = new Date().getFullYear();
 
 /* =============================================
+   THEME TOGGLE (light / dark)
+   ============================================= */
+(function initThemeToggle() {
+  const btn  = document.getElementById('theme-toggle');
+  const icon = btn?.querySelector('.theme-toggle-icon');
+  if (!btn || !icon) return;
+
+  function sync() {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+    icon.textContent = isLight ? '☀️' : '🌙';
+    btn.setAttribute('aria-label', isLight ? 'Switch to dark mode' : 'Switch to light mode');
+    btn.setAttribute('aria-pressed', String(isLight));
+  }
+
+  sync();
+  btn.addEventListener('click', () => {
+    const next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem('bb_theme', next);
+    sync();
+  });
+})();
+
+/* =============================================
    GOOGLE AUTH
    ============================================= */
 function decodeJWT(token) {

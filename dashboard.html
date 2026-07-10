@@ -10,6 +10,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="dashboard.css" />
+  <!-- Set theme before first paint to avoid a flash of the wrong theme -->
+  <script>
+    (function () {
+      var stored = localStorage.getItem('bb_theme');
+      var theme = stored || (matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
   <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body class="dashboard-page">
@@ -30,6 +38,9 @@
       </div>
 
       <div class="dash-user-menu">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+          <span class="theme-toggle-icon" aria-hidden="true">🌙</span>
+        </button>
         <img id="dash-avatar" src="" alt="" class="dash-avatar" width="36" height="36" />
         <div class="dash-user-info">
           <span id="dash-username" class="dash-username"></span>

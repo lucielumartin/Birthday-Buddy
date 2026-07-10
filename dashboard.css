@@ -529,3 +529,13 @@
   .delete-actions { flex-direction: column-reverse; }
   .delete-actions .btn { width: 100%; }
 }
+
+/* =============================================
+   LIGHT THEME OVERRIDES
+   ============================================= */
+[data-theme="light"] .profile-form .form-group input { background: rgba(30,27,75,0.035); }
+[data-theme="light"] .group-delete-btn:hover { color: #dc2626; }
+[data-theme="light"] .group-invite-input { background: rgba(30,27,75,0.03); }
+[data-theme="light"] .invite-url-input { background: rgba(30,27,75,0.035); }
+[data-theme="light"] .member-item { background: rgba(30,27,75,0.025); }
+[data-theme="light"] .modal-close:hover { background: rgba(30,27,75,0.06); }
