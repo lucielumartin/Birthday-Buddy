@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — Birthday Buddy</title>
   <meta name="description" content="Learn why we built Birthday Buddy — a simple, free tool for keeping communities connected through celebration." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://birthday-buddy-ruby.vercel.app/about.html" />
+  <meta property="og:title" content="About — Birthday Buddy" />
+  <meta property="og:description" content="Learn why we built Birthday Buddy — a simple, free tool for keeping communities connected through celebration." />
+  <meta property="og:image" content="https://birthday-buddy-ruby.vercel.app/images/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
@@ -31,7 +37,7 @@
         <li><a href="index.html#features">Features</a></li>
         <li><a href="index.html#how-it-works">How It Works</a></li>
         <li><a href="about.html" class="nav-active">About</a></li>
-        <li><a href="index.html#contact">Contact</a></li>
+        <li><a href="index.html#contact">Register</a></li>
       </ul>
     </nav>
   </header>
@@ -80,6 +86,9 @@
           </div>
         </div>
         <div class="about-story-visual" aria-hidden="true">
+          <div class="story-photo">
+            <img src="images/story-balloons.jpg" alt="" loading="lazy" width="900" height="601" />
+          </div>
           <div class="story-card story-card--1">
             <span class="story-card-emoji">😬</span>
             <p class="story-card-text">"Wait — was it yesterday?"</p>
@@ -242,6 +251,62 @@
 
   </main>
 
+  <!-- ===== NEWSLETTER ===== -->
+  <section class="newsletter section" id="newsletter" aria-labelledby="newsletter-heading">
+    <div class="container newsletter-inner">
+      <div class="section-header">
+        <p class="section-label">Stay in the Loop</p>
+        <h2 id="newsletter-heading" class="section-title">Subscribe to Our Newsletter</h2>
+        <p class="newsletter-desc">
+          Product updates and the occasional birthday surprise, straight to your inbox. No spam, ever.
+        </p>
+      </div>
+      <div class="form-wrapper newsletter-form-wrapper">
+        <form class="contact-form newsletter-form" id="newsletter-form" novalidate aria-label="Newsletter subscription form">
+          <div class="form-group">
+            <label for="newsletter-email">Email Address <span class="required" aria-label="required">*</span></label>
+            <input
+              type="email"
+              id="newsletter-email"
+              name="email"
+              placeholder="e.g. maria@email.com"
+              autocomplete="email"
+              required
+              aria-required="true"
+              aria-describedby="newsletter-email-error"
+            />
+            <span class="field-error" id="newsletter-email-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label" for="newsletter-consent">
+              <input
+                type="checkbox"
+                id="newsletter-consent"
+                name="consent"
+                required
+                aria-required="true"
+                aria-describedby="newsletter-consent-error"
+              />
+              <span>I agree to receive marketing emails from Birthday Buddy. I can unsubscribe at any time. <span class="required" aria-label="required">*</span></span>
+            </label>
+            <span class="field-error" id="newsletter-consent-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full">
+            <span class="btn-text">Subscribe 📬</span>
+            <span class="btn-loading" aria-hidden="true">Subscribing...</span>
+          </button>
+
+          <div class="form-success" id="newsletter-success" role="alert" aria-live="polite" hidden>
+            <span aria-hidden="true">📬</span>
+            <strong>You're subscribed!</strong> Check your inbox for a confirmation email.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer" role="contentinfo">
     <div class="container footer-inner">
@@ -258,6 +323,7 @@
           <li><a href="index.html#how-it-works">How It Works</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="index.html#contact">Register</a></li>
+          <li><a href="#newsletter">Subscribe</a></li>
         </ul>
       </nav>
     </div>
@@ -268,6 +334,28 @@
 
   <script>
     document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // Scroll-reveal animation for value + testimonial cards
+    const animatables = document.querySelectorAll('.value-card, .testimonial-card');
+    animatables.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(28px)';
+      el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    });
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    animatables.forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.value-card').forEach((card, i) => {
+      card.style.transitionDelay = `${i * 80}ms`;
+    });
+
     const toggle = document.querySelector('.nav-toggle');
     const menu   = document.getElementById('nav-menu');
     if (toggle && menu) {
@@ -276,6 +364,60 @@
         toggle.setAttribute('aria-expanded', String(!expanded));
         toggle.setAttribute('aria-label', expanded ? 'Open menu' : 'Close menu');
         menu.classList.toggle('is-open', !expanded);
+      });
+    }
+
+    // Newsletter subscription form
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) {
+      const newsletterSubmitBtn  = newsletterForm.querySelector('button[type="submit"]');
+      const newsletterSuccessMsg = document.getElementById('newsletter-success');
+      const newsletterEmail      = newsletterForm.querySelector('#newsletter-email');
+      const newsletterEmailError = newsletterForm.querySelector('#newsletter-email-error');
+      const newsletterConsent      = newsletterForm.querySelector('#newsletter-consent');
+      const newsletterConsentError = newsletterForm.querySelector('#newsletter-consent-error');
+
+      function validateNewsletterEmail() {
+        let message = '';
+        if (!newsletterEmail.value.trim()) message = 'Please enter your email address.';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newsletterEmail.value.trim())) message = 'Please enter a valid email address.';
+        newsletterEmailError.textContent = message;
+        newsletterEmail.setAttribute('aria-invalid', message ? 'true' : 'false');
+        return message === '';
+      }
+
+      function validateNewsletterConsent() {
+        const message = newsletterConsent.checked ? '' : 'Please agree to receive emails to subscribe.';
+        newsletterConsentError.textContent = message;
+        newsletterConsent.setAttribute('aria-invalid', message ? 'true' : 'false');
+        return message === '';
+      }
+
+      newsletterEmail.addEventListener('blur', validateNewsletterEmail);
+      newsletterEmail.addEventListener('input', () => {
+        if (newsletterEmail.getAttribute('aria-invalid') === 'true') validateNewsletterEmail();
+      });
+      newsletterConsent.addEventListener('change', validateNewsletterConsent);
+
+      newsletterForm.addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const validEmail   = validateNewsletterEmail();
+        const validConsent = validateNewsletterConsent();
+        if (!validEmail) { newsletterEmail.focus(); return; }
+        if (!validConsent) { newsletterConsent.focus(); return; }
+
+        newsletterSubmitBtn.classList.add('is-loading');
+        await new Promise(r => setTimeout(r, 600));
+        newsletterSubmitBtn.classList.remove('is-loading');
+
+        newsletterForm.reset();
+        newsletterEmail.removeAttribute('aria-invalid');
+        newsletterConsent.removeAttribute('aria-invalid');
+
+        newsletterSuccessMsg.hidden = false;
+        newsletterSuccessMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        setTimeout(() => { newsletterSuccessMsg.hidden = true; }, 8000);
       });
     }
   </script>

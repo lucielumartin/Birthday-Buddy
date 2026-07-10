@@ -5,6 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Birthday Buddy — Never Miss a Birthday Again</title>
   <meta name="description" content="Birthday Buddy lets group members register birthdays in a shared directory and receive automatic email notifications on the big day." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://birthday-buddy-ruby.vercel.app/" />
+  <meta property="og:title" content="Birthday Buddy — Never Miss a Birthday Again" />
+  <meta property="og:description" content="Birthday Buddy lets group members register birthdays in a shared directory and receive automatic email notifications on the big day." />
+  <meta property="og:image" content="https://birthday-buddy-ruby.vercel.app/images/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
@@ -32,7 +38,7 @@
         <li><a href="#features">Features</a></li>
         <li><a href="#how-it-works">How It Works</a></li>
         <li><a href="about.html">About</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact">Register</a></li>
         <li id="nav-auth-signed-in" hidden>
           <a href="dashboard.html" class="nav-user-link" aria-label="Go to your dashboard">
             <img id="nav-avatar" src="" alt="" class="nav-avatar" width="32" height="32" />
@@ -64,44 +70,105 @@
         <span class="shape shape-4"></span>
       </div>
       <div class="container hero-inner">
-        <div class="hero-badge">
-          <span>💬</span> WhatsApp communications coming soon
-        </div>
-        <h1 id="hero-heading" class="hero-title">
-          Never Miss<br />
-          <span class="highlight">A Birthday</span><br />
-          Again.
-        </h1>
-        <p class="hero-subtitle">
-          Birthday Buddy connects your group with a shared birthday directory.
-          Register once — get automatic email reminders every time someone celebrates their big day.
-        </p>
-        <!-- Signed-out: sign in or guest -->
-        <div class="hero-auth" id="hero-auth-signed-out">
-          <div id="hero-signin-container"></div>
-          <span class="hero-auth-or" aria-hidden="true">or</span>
-          <button class="btn btn-ghost" id="guest-btn">Continue as Guest</button>
-        </div>
-        <!-- Signed-in: go to dashboard -->
-        <div class="hero-auth" id="hero-auth-signed-in" hidden>
-          <a href="dashboard.html" class="btn btn-primary">My Profile</a>
-          <a href="#how-it-works" class="btn btn-ghost">See How It Works</a>
-        </div>
-        <div class="hero-stats" role="list" aria-label="Key stats">
-          <div class="stat" role="listitem">
-            <span class="stat-value">100%</span>
-            <span class="stat-label">Free</span>
+        <div class="hero-copy">
+          <div class="hero-badge">
+            <span>💬</span> WhatsApp communications coming soon
           </div>
-          <div class="stat-divider" aria-hidden="true"></div>
-          <div class="stat" role="listitem">
-            <span class="stat-value">0</span>
-            <span class="stat-label">Apps to Install</span>
+          <h1 id="hero-heading" class="hero-title">
+            Never Miss<br />
+            <span class="highlight">A Birthday</span><br />
+            Again.
+          </h1>
+          <p class="hero-subtitle">
+            Birthday Buddy connects your group with a shared birthday directory.
+            Register once — get automatic email reminders every time someone celebrates their big day.
+          </p>
+          <!-- Signed-out: sign in or guest -->
+          <div class="hero-auth" id="hero-auth-signed-out">
+            <div id="hero-signin-container"></div>
+            <span class="hero-auth-or" aria-hidden="true">or</span>
+            <button class="btn btn-ghost" id="guest-btn">Continue as Guest</button>
           </div>
-          <div class="stat-divider" aria-hidden="true"></div>
-          <div class="stat" role="listitem">
-            <span class="stat-value">∞</span>
-            <span class="stat-label">Celebrations</span>
+          <!-- Signed-in: go to dashboard -->
+          <div class="hero-auth" id="hero-auth-signed-in" hidden>
+            <a href="dashboard.html" class="btn btn-primary">My Profile</a>
+            <a href="#how-it-works" class="btn btn-ghost">See How It Works</a>
           </div>
+          <div class="hero-stats" role="list" aria-label="Key stats">
+            <div class="stat" role="listitem">
+              <span class="stat-value">100%</span>
+              <span class="stat-label">Free</span>
+            </div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="stat" role="listitem">
+              <span class="stat-value">0</span>
+              <span class="stat-label">Apps to Install</span>
+            </div>
+            <div class="stat-divider" aria-hidden="true"></div>
+            <div class="stat" role="listitem">
+              <span class="stat-value">∞</span>
+              <span class="stat-label">Celebrations</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-illustration" aria-hidden="true">
+          <svg viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="hero-illo-gradient" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#D946EF"/>
+                <stop offset="1" stop-color="#06B6D4"/>
+              </linearGradient>
+            </defs>
+
+            <!-- confetti -->
+            <g>
+              <g transform="rotate(18 45 65)"><rect class="illo-bob" x="40" y="60" width="10" height="10" rx="2" fill="#FBBF24"/></g>
+              <circle class="illo-bob-delay" cx="264" cy="70" r="6" fill="#06B6D4"/>
+              <g transform="rotate(-12 256 184)"><rect class="illo-bob-delay" x="252" y="180" width="9" height="9" rx="2" fill="#D946EF"/></g>
+              <circle class="illo-bob" cx="52" cy="210" r="5" fill="#FBBF24"/>
+              <g transform="rotate(30 154 28)"><rect class="illo-bob" x="150" y="24" width="8" height="8" rx="2" fill="#06B6D4"/></g>
+              <circle class="illo-bob-delay" cx="30" cy="140" r="4" fill="#D946EF"/>
+            </g>
+
+            <!-- calendar card -->
+            <g class="illo-calendar" transform="rotate(-6 160 168)">
+              <rect x="70" y="70" width="180" height="196" rx="16" fill="var(--color-bg-card)" stroke="#D946EF" stroke-opacity="0.35"/>
+              <rect x="70" y="70" width="180" height="46" rx="16" fill="url(#hero-illo-gradient)"/>
+              <rect x="70" y="100" width="180" height="16" fill="url(#hero-illo-gradient)"/>
+              <rect x="102" y="58" width="10" height="28" rx="5" fill="#a78bca"/>
+              <rect x="208" y="58" width="10" height="28" rx="5" fill="#a78bca"/>
+
+              <g fill="#a78bca" opacity="0.5">
+                <circle cx="100" cy="144" r="4"/><circle cx="130" cy="144" r="4"/><circle cx="160" cy="144" r="4"/><circle cx="190" cy="144" r="4"/><circle cx="220" cy="144" r="4"/>
+                <circle cx="100" cy="174" r="4"/><circle cx="130" cy="174" r="4"/><circle cx="190" cy="174" r="4"/><circle cx="220" cy="174" r="4"/>
+                <circle cx="100" cy="204" r="4"/><circle cx="130" cy="204" r="4"/><circle cx="160" cy="204" r="4"/><circle cx="190" cy="204" r="4"/>
+              </g>
+
+              <circle cx="160" cy="174" r="17" fill="url(#hero-illo-gradient)"/>
+              <text x="160" y="180" text-anchor="middle" font-family="var(--font-mono)" font-size="15" fill="white" font-weight="700">14</text>
+            </g>
+
+            <!-- confetti burst (hover) -->
+            <g class="illo-confetti-burst">
+              <rect class="burst-piece" style="--tx:-70px; --ty:-60px; --rot:-40deg; animation-delay:0ms"   x="156" y="164" width="9" height="9" rx="2" fill="#FBBF24"/>
+              <circle class="burst-piece" style="--tx:70px; --ty:-55px; --rot:30deg; animation-delay:40ms"  cx="160" cy="168" r="5" fill="#06B6D4"/>
+              <rect class="burst-piece" style="--tx:-80px; --ty:20px; --rot:50deg; animation-delay:80ms"    x="156" y="164" width="8" height="8" rx="2" fill="#D946EF"/>
+              <circle class="burst-piece" style="--tx:82px; --ty:15px; --rot:-25deg; animation-delay:60ms"  cx="160" cy="168" r="4" fill="#FBBF24"/>
+              <rect class="burst-piece" style="--tx:-30px; --ty:-85px; --rot:20deg; animation-delay:120ms"  x="156" y="164" width="7" height="7" rx="2" fill="#06B6D4"/>
+              <rect class="burst-piece" style="--tx:34px; --ty:-88px; --rot:-45deg; animation-delay:20ms"   x="156" y="164" width="9" height="9" rx="2" fill="#D946EF"/>
+              <circle class="burst-piece" style="--tx:-10px; --ty:88px; --rot:15deg; animation-delay:100ms" cx="160" cy="168" r="5" fill="#FBBF24"/>
+              <circle class="burst-piece" style="--tx:14px; --ty:90px; --rot:-15deg; animation-delay:140ms" cx="160" cy="168" r="4" fill="#06B6D4"/>
+            </g>
+
+            <!-- gift box -->
+            <g transform="translate(206 218)">
+              <rect x="0" y="14" width="52" height="40" rx="6" fill="#FBBF24"/>
+              <rect x="0" y="14" width="52" height="12" fill="#1E1B4B" opacity="0.15"/>
+              <rect x="22" y="0" width="8" height="54" fill="#D946EF"/>
+              <path d="M26 0 C14 0 10 12 26 14 C42 12 38 0 26 0Z" fill="#D946EF"/>
+            </g>
+          </svg>
         </div>
       </div>
       <div class="hero-marquee" aria-hidden="true">
@@ -352,6 +419,62 @@
 
   </main>
 
+  <!-- ===== NEWSLETTER ===== -->
+  <section class="newsletter section" id="newsletter" aria-labelledby="newsletter-heading">
+    <div class="container newsletter-inner">
+      <div class="section-header">
+        <p class="section-label">Stay in the Loop</p>
+        <h2 id="newsletter-heading" class="section-title">Subscribe to Our Newsletter</h2>
+        <p class="newsletter-desc">
+          Product updates and the occasional birthday surprise, straight to your inbox. No spam, ever.
+        </p>
+      </div>
+      <div class="form-wrapper newsletter-form-wrapper">
+        <form class="contact-form newsletter-form" id="newsletter-form" novalidate aria-label="Newsletter subscription form">
+          <div class="form-group">
+            <label for="newsletter-email">Email Address <span class="required" aria-label="required">*</span></label>
+            <input
+              type="email"
+              id="newsletter-email"
+              name="email"
+              placeholder="e.g. maria@email.com"
+              autocomplete="email"
+              required
+              aria-required="true"
+              aria-describedby="newsletter-email-error"
+            />
+            <span class="field-error" id="newsletter-email-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label" for="newsletter-consent">
+              <input
+                type="checkbox"
+                id="newsletter-consent"
+                name="consent"
+                required
+                aria-required="true"
+                aria-describedby="newsletter-consent-error"
+              />
+              <span>I agree to receive marketing emails from Birthday Buddy. I can unsubscribe at any time. <span class="required" aria-label="required">*</span></span>
+            </label>
+            <span class="field-error" id="newsletter-consent-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full">
+            <span class="btn-text">Subscribe 📬</span>
+            <span class="btn-loading" aria-hidden="true">Subscribing...</span>
+          </button>
+
+          <div class="form-success" id="newsletter-success" role="alert" aria-live="polite" hidden>
+            <span aria-hidden="true">📬</span>
+            <strong>You're subscribed!</strong> Check your inbox for a confirmation email.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== GROUP BIRTHDAY VIEW (shown after guest registers via invite) ===== -->
   <section class="group-view section" id="group-view" hidden aria-labelledby="group-view-heading">
     <div class="container">
@@ -387,6 +510,7 @@
           <li><a href="#how-it-works">How It Works</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="#contact">Register</a></li>
+          <li><a href="#newsletter">Subscribe</a></li>
         </ul>
       </nav>
     </div>
