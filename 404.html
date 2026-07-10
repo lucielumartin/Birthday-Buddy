@@ -55,6 +55,62 @@
     </section>
   </main>
 
+  <!-- ===== NEWSLETTER ===== -->
+  <section class="newsletter section" id="newsletter" aria-labelledby="newsletter-heading">
+    <div class="container newsletter-inner">
+      <div class="section-header">
+        <p class="section-label">Stay in the Loop</p>
+        <h2 id="newsletter-heading" class="section-title">Subscribe to Our Newsletter</h2>
+        <p class="newsletter-desc">
+          Product updates and the occasional birthday surprise, straight to your inbox. No spam, ever.
+        </p>
+      </div>
+      <div class="form-wrapper newsletter-form-wrapper">
+        <form class="contact-form newsletter-form" id="newsletter-form" novalidate aria-label="Newsletter subscription form">
+          <div class="form-group">
+            <label for="newsletter-email">Email Address <span class="required" aria-label="required">*</span></label>
+            <input
+              type="email"
+              id="newsletter-email"
+              name="email"
+              placeholder="e.g. maria@email.com"
+              autocomplete="email"
+              required
+              aria-required="true"
+              aria-describedby="newsletter-email-error"
+            />
+            <span class="field-error" id="newsletter-email-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <div class="form-group">
+            <label class="checkbox-label" for="newsletter-consent">
+              <input
+                type="checkbox"
+                id="newsletter-consent"
+                name="consent"
+                required
+                aria-required="true"
+                aria-describedby="newsletter-consent-error"
+              />
+              <span>I agree to receive marketing emails from Birthday Buddy. I can unsubscribe at any time. <span class="required" aria-label="required">*</span></span>
+            </label>
+            <span class="field-error" id="newsletter-consent-error" role="alert" aria-live="polite"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-full">
+            <span class="btn-text">Subscribe 📬</span>
+            <span class="btn-loading" aria-hidden="true">Subscribing...</span>
+          </button>
+
+          <div class="form-success" id="newsletter-success" role="alert" aria-live="polite" hidden>
+            <span aria-hidden="true">📬</span>
+            <strong>You're subscribed!</strong> Check your inbox for a confirmation email.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
   <!-- ===== FOOTER ===== -->
   <footer class="site-footer" role="contentinfo">
     <div class="container footer-inner">
@@ -71,6 +127,7 @@
           <li><a href="index.html#how-it-works">How It Works</a></li>
           <li><a href="about.html">About</a></li>
           <li><a href="index.html#contact">Register</a></li>
+          <li><a href="#newsletter">Subscribe</a></li>
         </ul>
       </nav>
     </div>
@@ -81,6 +138,60 @@
 
   <script>
     document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // Newsletter subscription form
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) {
+      const newsletterSubmitBtn  = newsletterForm.querySelector('button[type="submit"]');
+      const newsletterSuccessMsg = document.getElementById('newsletter-success');
+      const newsletterEmail      = newsletterForm.querySelector('#newsletter-email');
+      const newsletterEmailError = newsletterForm.querySelector('#newsletter-email-error');
+      const newsletterConsent      = newsletterForm.querySelector('#newsletter-consent');
+      const newsletterConsentError = newsletterForm.querySelector('#newsletter-consent-error');
+
+      function validateNewsletterEmail() {
+        let message = '';
+        if (!newsletterEmail.value.trim()) message = 'Please enter your email address.';
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newsletterEmail.value.trim())) message = 'Please enter a valid email address.';
+        newsletterEmailError.textContent = message;
+        newsletterEmail.setAttribute('aria-invalid', message ? 'true' : 'false');
+        return message === '';
+      }
+
+      function validateNewsletterConsent() {
+        const message = newsletterConsent.checked ? '' : 'Please agree to receive emails to subscribe.';
+        newsletterConsentError.textContent = message;
+        newsletterConsent.setAttribute('aria-invalid', message ? 'true' : 'false');
+        return message === '';
+      }
+
+      newsletterEmail.addEventListener('blur', validateNewsletterEmail);
+      newsletterEmail.addEventListener('input', () => {
+        if (newsletterEmail.getAttribute('aria-invalid') === 'true') validateNewsletterEmail();
+      });
+      newsletterConsent.addEventListener('change', validateNewsletterConsent);
+
+      newsletterForm.addEventListener('submit', async e => {
+        e.preventDefault();
+
+        const validEmail   = validateNewsletterEmail();
+        const validConsent = validateNewsletterConsent();
+        if (!validEmail) { newsletterEmail.focus(); return; }
+        if (!validConsent) { newsletterConsent.focus(); return; }
+
+        newsletterSubmitBtn.classList.add('is-loading');
+        await new Promise(r => setTimeout(r, 600));
+        newsletterSubmitBtn.classList.remove('is-loading');
+
+        newsletterForm.reset();
+        newsletterEmail.removeAttribute('aria-invalid');
+        newsletterConsent.removeAttribute('aria-invalid');
+
+        newsletterSuccessMsg.hidden = false;
+        newsletterSuccessMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        setTimeout(() => { newsletterSuccessMsg.hidden = true; }, 8000);
+      });
+    }
   </script>
 </body>
 </html>
