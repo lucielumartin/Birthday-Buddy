@@ -300,6 +300,63 @@ form.addEventListener('submit', async e => {
 });
 
 /* =============================================
+   NEWSLETTER SUBSCRIPTION
+   ============================================= */
+const newsletterForm = document.getElementById('newsletter-form');
+
+if (newsletterForm) {
+  const newsletterSubmitBtn  = newsletterForm.querySelector('button[type="submit"]');
+  const newsletterSuccessMsg = document.getElementById('newsletter-success');
+  const newsletterEmail      = newsletterForm.querySelector('#newsletter-email');
+  const newsletterEmailError = newsletterForm.querySelector('#newsletter-email-error');
+  const newsletterConsent      = newsletterForm.querySelector('#newsletter-consent');
+  const newsletterConsentError = newsletterForm.querySelector('#newsletter-consent-error');
+
+  function validateNewsletterEmail() {
+    let message = '';
+    if (!newsletterEmail.value.trim()) message = 'Please enter your email address.';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(newsletterEmail.value.trim())) message = 'Please enter a valid email address.';
+    newsletterEmailError.textContent = message;
+    newsletterEmail.setAttribute('aria-invalid', message ? 'true' : 'false');
+    return message === '';
+  }
+
+  function validateNewsletterConsent() {
+    const message = newsletterConsent.checked ? '' : 'Please agree to receive emails to subscribe.';
+    newsletterConsentError.textContent = message;
+    newsletterConsent.setAttribute('aria-invalid', message ? 'true' : 'false');
+    return message === '';
+  }
+
+  newsletterEmail.addEventListener('blur', validateNewsletterEmail);
+  newsletterEmail.addEventListener('input', () => {
+    if (newsletterEmail.getAttribute('aria-invalid') === 'true') validateNewsletterEmail();
+  });
+  newsletterConsent.addEventListener('change', validateNewsletterConsent);
+
+  newsletterForm.addEventListener('submit', async e => {
+    e.preventDefault();
+
+    const validEmail   = validateNewsletterEmail();
+    const validConsent = validateNewsletterConsent();
+    if (!validEmail) { newsletterEmail.focus(); return; }
+    if (!validConsent) { newsletterConsent.focus(); return; }
+
+    newsletterSubmitBtn.classList.add('is-loading');
+    await new Promise(r => setTimeout(r, 600));
+    newsletterSubmitBtn.classList.remove('is-loading');
+
+    newsletterForm.reset();
+    newsletterEmail.removeAttribute('aria-invalid');
+    newsletterConsent.removeAttribute('aria-invalid');
+
+    newsletterSuccessMsg.hidden = false;
+    newsletterSuccessMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    setTimeout(() => { newsletterSuccessMsg.hidden = true; }, 8000);
+  });
+}
+
+/* =============================================
    GROUP BIRTHDAY VIEW (guest post-registration)
    ============================================= */
 function escapeHtml(str) {
