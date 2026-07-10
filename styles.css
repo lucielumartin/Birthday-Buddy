@@ -291,6 +291,25 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   50%       { transform: translateY(-6px); }
 }
 
+/* Confetti burst on calendar hover */
+.illo-calendar { cursor: pointer; }
+
+.illo-confetti-burst .burst-piece {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.illo-calendar:hover ~ .illo-confetti-burst .burst-piece {
+  animation: illo-confetti-pop 0.85s ease-out forwards;
+}
+
+@keyframes illo-confetti-pop {
+  0%   { opacity: 0; transform: translate(0, 0) scale(0.4) rotate(0deg); }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(1) rotate(var(--rot)); }
+}
+
 .hero-inner {
   position: relative;
   z-index: 1;
