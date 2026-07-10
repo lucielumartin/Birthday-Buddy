@@ -332,6 +332,28 @@
 
   <script>
     document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    // Scroll-reveal animation for value + testimonial cards
+    const animatables = document.querySelectorAll('.value-card, .testimonial-card');
+    animatables.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(28px)';
+      el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    });
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    animatables.forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.value-card').forEach((card, i) => {
+      card.style.transitionDelay = `${i * 80}ms`;
+    });
+
     const toggle = document.querySelector('.nav-toggle');
     const menu   = document.getElementById('nav-menu');
     if (toggle && menu) {

@@ -206,7 +206,10 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   position: relative;
   align-items: center;
   justify-content: center;
+  border-radius: var(--radius-sm);
+  transition: background var(--transition);
 }
+.nav-toggle:hover { background: rgba(255,255,255,0.08); }
 .hamburger,
 .hamburger::before,
 .hamburger::after {
