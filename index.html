@@ -16,6 +16,8 @@
 </head>
 <body>
 
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- ===== HEADER / NAV ===== -->
   <header class="site-header" role="banner">
     <nav class="nav container" aria-label="Main navigation">
@@ -51,7 +53,7 @@
     </div>
   </div>
 
-  <main>
+  <main id="main-content" tabindex="-1">
 
     <!-- ===== HERO ===== -->
     <section class="hero" aria-labelledby="hero-heading">
@@ -129,7 +131,7 @@
         </div>
         <div class="features-grid">
 
-          <article class="feature-card" tabindex="0">
+          <article class="feature-card">
             <div class="feature-icon" aria-hidden="true">📋</div>
             <h3 class="feature-title">Shared Directory</h3>
             <p class="feature-desc">
@@ -137,7 +139,7 @@
             </p>
           </article>
 
-          <article class="feature-card feature-card--accent" tabindex="0">
+          <article class="feature-card feature-card--accent">
             <div class="feature-icon" aria-hidden="true">📧</div>
             <h3 class="feature-title">Email Notifications</h3>
             <p class="feature-desc">
@@ -145,7 +147,7 @@
             </p>
           </article>
 
-          <article class="feature-card" tabindex="0">
+          <article class="feature-card">
             <div class="feature-icon" aria-hidden="true">⚡</div>
             <h3 class="feature-title">Instant Setup</h3>
             <p class="feature-desc">

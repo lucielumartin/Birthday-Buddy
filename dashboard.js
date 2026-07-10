@@ -292,6 +292,43 @@ function copyInvite(groupId, groupName, btnId = `copy-${groupId}`) {
 }
 
 /* =============================================
+   MODAL FOCUS MANAGEMENT
+   ============================================= */
+let _lastFocusedEl = null;
+
+function getFocusable(container) {
+  return Array.from(container.querySelectorAll(
+    'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+  )).filter(el => el.offsetParent !== null);
+}
+
+function restoreFocus() {
+  if (_lastFocusedEl) _lastFocusedEl.focus();
+  _lastFocusedEl = null;
+}
+
+function trapModalFocus(e) {
+  if (e.key !== 'Tab') return;
+  const openModal = [createModal, inviteModal, membersModal, deleteModal].find(m => !m.hidden);
+  if (!openModal) return;
+
+  const focusable = getFocusable(openModal);
+  if (focusable.length === 0) return;
+
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+}
+document.addEventListener('keydown', trapModalFocus);
+
+/* =============================================
    CREATE GROUP MODAL
    ============================================= */
 const createModal = document.getElementById('create-modal');
@@ -300,6 +337,7 @@ const createInput = document.getElementById('new-group-name');
 const createError = document.getElementById('new-group-error');
 
 function openCreateModal() {
+  _lastFocusedEl = document.activeElement;
   createModal.hidden = false;
   createForm.reset();
   createError.textContent = '';
@@ -310,6 +348,7 @@ function openCreateModal() {
 function closeCreateModal() {
   createModal.hidden = true;
   document.body.style.overflow = '';
+  restoreFocus();
 }
 
 document.getElementById('create-modal-close').addEventListener('click', closeCreateModal);
@@ -362,6 +401,7 @@ let _inviteGroupId = null;
 let _inviteGroupName = null;
 
 function openInviteModal(groupId, groupName) {
+  _lastFocusedEl = document.activeElement;
   _inviteGroupId = groupId;
   _inviteGroupName = groupName;
 
@@ -380,6 +420,7 @@ function openInviteModal(groupId, groupName) {
 function closeInviteModal() {
   inviteModal.hidden = true;
   document.body.style.overflow = '';
+  restoreFocus();
 }
 
 document.getElementById('invite-modal-close').addEventListener('click', closeInviteModal);
@@ -405,6 +446,7 @@ let _membersGroupId = null;
 let _membersGroupName = null;
 
 function openMembersModal(groupId, groupName) {
+  _lastFocusedEl = document.activeElement;
   _membersGroupId = groupId;
   _membersGroupName = groupName;
 
@@ -448,6 +490,7 @@ function openMembersModal(groupId, groupName) {
 function closeMembersModal() {
   membersModal.hidden = true;
   document.body.style.overflow = '';
+  restoreFocus();
 }
 
 document.getElementById('members-modal-close').addEventListener('click', closeMembersModal);
@@ -462,6 +505,7 @@ const deleteModal = document.getElementById('delete-modal');
 let _deleteGroupId = null;
 
 function openDeleteModal(groupId, groupName) {
+  _lastFocusedEl = document.activeElement;
   _deleteGroupId = groupId;
   document.getElementById('delete-group-name').textContent = groupName;
   deleteModal.hidden = false;
@@ -472,6 +516,7 @@ function closeDeleteModal() {
   deleteModal.hidden = true;
   document.body.style.overflow = '';
   _deleteGroupId = null;
+  restoreFocus();
 }
 
 document.getElementById('delete-cancel-btn').addEventListener('click', closeDeleteModal);
@@ -492,6 +537,7 @@ document.getElementById('delete-confirm-btn').addEventListener('click', () => {
     if (e.target === modal) {
       modal.hidden = true;
       document.body.style.overflow = '';
+      restoreFocus();
     }
   });
 });
@@ -499,7 +545,7 @@ document.getElementById('delete-confirm-btn').addEventListener('click', () => {
 document.addEventListener('keydown', e => {
   if (e.key !== 'Escape') return;
   [createModal, inviteModal, membersModal, deleteModal].forEach(m => {
-    if (!m.hidden) { m.hidden = true; document.body.style.overflow = ''; }
+    if (!m.hidden) { m.hidden = true; document.body.style.overflow = ''; restoreFocus(); }
   });
 });
 

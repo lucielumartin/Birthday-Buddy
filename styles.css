@@ -58,6 +58,25 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   border-radius: var(--radius-sm);
 }
 
+/* === SKIP LINK === */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1rem;
+  z-index: 1000;
+  padding: 0.75em 1.5em;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-family: var(--font-body);
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  transition: top var(--transition);
+}
+.skip-link:focus-visible,
+.skip-link:focus {
+  top: 1rem;
+}
+
 /* === SCROLLBAR === */
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: var(--color-bg); }
@@ -120,7 +139,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .btn:active { transform: translateY(0); }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--color-primary), #a21caf);
+  background: linear-gradient(135deg, #a21caf, #701a75);
   color: #fff;
   box-shadow: 0 4px 20px rgba(217,70,239,0.4);
 }
